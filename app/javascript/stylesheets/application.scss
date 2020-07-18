@@ -1,2 +1,28 @@
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap');
+@import '@fortawesome/fontawesome-free';
+
+body {
+    width: 1200px;
+    height: 800px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+a {
+    color: black;
+}
+
+.navbar {
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #F1F1F1;
+}
+
+.get-art {
+    font-family: 'Lily Script One', cursive;
+    font-size: 36px;
+    width: 50%;
+    font-weight: bold;
+    color: black;
+}

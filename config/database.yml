@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: getart_development
+  database: getart
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: getart_production
+  database: getart
   username: getart
   password: <%= ENV['GETART_DATABASE_PASSWORD'] %>

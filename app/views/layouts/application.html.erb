@@ -10,6 +10,35 @@
   </head>
 
   <body>
+
+    <nav class="navbar navbar-expand-md navbar-lite fixed-top bg-lite">
+      <a class="navbar-brand get-art" href="#">Get Art</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><%= fa_icon('search') %></button>
+        </form>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+          <%= link_to "My Account", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "#", :class=> "nav-link" do %>
+             <%= fa_icon('heart') %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "#", :class=> "nav-link" do %>
+             <%= fa_icon('shopping-cart') %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
