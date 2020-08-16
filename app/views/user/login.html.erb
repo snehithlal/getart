@@ -1,0 +1,28 @@
+<div class="signin-box">
+  <h2>Log in or Sign Up</h2>
+  <div class="row">
+    <div class="col">
+      <%= form_for(@user, url: login_user_index_path) do |f| %>
+        <div class="field">
+          <%= f.label :email_id %><br />
+          <%= f.email_field :email_id, autofocus: true, autocomplete: "off" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+
+        <div class="field">
+          <%= f.submit "Log in" %>
+          <%= link_to "Sign up", sign_up_user_index_path, class: "button-like" %><br />
+        </div>
+      <% end %>
+    </div>
+    <div class="vl"></div>
+    <div class="col">
+      <i class="fab fa-facebook-f" style="width: 4em;height:4em;"></i>
+      <i class="fab fa-google" style="width: 4em;height:4em;"></i>
+    </div>
+  </div>
+</div>

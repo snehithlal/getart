@@ -1,0 +1,62 @@
+// Place all the styles related to the User controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.signin-box h2{
+  text-align: center;
+}
+
+.signin-box input[type="text"], input[type="email"], input[type="password"]{
+  border-radius: 10px;
+  border: 2px solid #F2D9D9;
+  background-color: #FAF1F1;
+  padding: 5px 15px;
+}
+
+.signin-box input[type="submit"], .button-like{
+  border-radius: 5px;
+  border: 2px solid #6C5B5B;
+  background-color: #6C5B5B;
+  color: white;
+  padding: 5px 30px;
+  margin: 10px auto;
+  text-decoration: none;
+}
+
+.signup-box h2{
+  text-align: center;
+}
+
+.signup-box input[type="text"], input[type="email"], input[type="password"]{
+  border-radius: 10px;
+  border: 2px solid #F2D9D9;
+  background-color: #FAF1F1;
+  padding: 5px 15px;
+}
+
+.signup-box input[type="submit"], .button-like{
+  border-radius: 5px;
+  border: 2px solid #6C5B5B;
+  background-color: #6C5B5B;
+  color: white;
+  padding: 5px 30px;
+  margin: 10px auto;
+  text-decoration: none;
+}
+
+.button-like:hover{
+  background-color: #6C5B5B;
+  color: white;
+  text-decoration: none;
+}
+
+.vl {
+  border-left: 1px solid black;
+  height: 250px;
+  position: absolute;
+  left: 50%;
+}
+
+.icon-links:hover{
+  cursor: pointer; 
+}
