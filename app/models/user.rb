@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   attr_accessor :full_name, :password, :confirm_password
-  validates_presence_of :full_name, :password, :email_id, :phone_no
+  validates_presence_of :password, :email_id#,:full_name, :phone_no
   validates_presence_of :confirm_password, if: Proc.new{|user| user.new_record?}
   validate :password_match, if: Proc.new{|user| user.password.present?}
-  validates :email_id, :phone_no, uniqueness: { scope: :is_active,
-      message: "can have only one active per time." }, if: Proc.new{|user| user.new_record?}
-  validates :phone_no, numericality: true, length: { minimum: 10, maximum: 10 }
+  validates :email_id, uniqueness: { scope: :is_active,
+      message: "can have only one active per time." }, if: Proc.new{|user| user.new_record?} #:phone_no
+  # validates :phone_no, numericality: true, length: { minimum: 10, maximum: 10 }
   has_one :user_detail, dependent: :destroy
   after_create :create_user_detail
   before_save :hash_password
@@ -18,6 +18,9 @@ class User < ApplicationRecord
       return user.hashed_password == Digest::SHA1.hexdigest(user.password_salt.to_s + self.password)
     end
     return false
+  end
+  
+  def send_otp_by_mail(otp)
   end
   
   def self.minimum_password_length

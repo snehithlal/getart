@@ -12,6 +12,43 @@ require("channels")
 import "bootstrap"
 import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/js/all"
+
+
+$(function(){
+  // jquery number field
+  $(".numberField").keypress(function (e) {
+    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+      return false;
+    }
+   });
+   
+   $(".decimalField").keypress(function (e) {
+      if (e.which != 8 && e.which != 0 && ((e.which < 48 && e.which != 46) || e.which > 57)) {
+       return false;
+     }
+    });
+   
+   $(".numberField").focusout(function (e) {
+     if($(this).val() == 0){
+       $(this).val('');
+     }
+   });
+   
+   $(".numberField").change(function (e) {
+     if($(this).val() == 0){
+       $(this).val('');
+     }
+   });
+   
+   $('.otp-field').keypress(function(e){
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+       return false;
+     }else{
+       $(this).next('.otp-field').focus();
+       $(this).css("border", "2px solid lightgrey");
+     }
+   })
+})
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.

@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-4">
+    <div class="test1">
+      <div style="text-align:right;width: 100%;">Edit</div>
+      <div style="text-align:center;width: 100%;">
+        <img src="https://www.clipartmax.com/png/full/144-1442578_flat-person-icon-download-dummy-man.png" width="150px" height="150px">
+        </img>
+      </div>
+      <div style="text-align:center;width: 100%;"><%= @user_detail.full_name %></div>
+      <div style="text-align:center;width: 100%;"><%= @user_detail.email_id %></div>
+      <div style="text-align:center;width: 100%;"><%= @user_detail.phone_no %></div>
+      <div style="text-align:center;width: 100%;"><%= link_to "Log out", logout_user_index_path %></div>
+    </div>
+  </div>
+  <div class="col-8">
+    <div>
+      <div class="row">
+        <div class="col">
+          <div class="test1">My Orders</div>
+        </div>
+        <div class="col">
+          <div class="test1">My Addresses</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="test1">Payment Options</div>
+        </div>
+        <div class="col">
+          <div class="test1">Security</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="test1">Coupons</div>
+        </div>
+        <div class="col">
+          <div class="test1">Help</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .test1{
+    background-color: #F0F5F9;
+    border-radius: 40px;
+  }
+</style>

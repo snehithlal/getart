@@ -1,48 +1,81 @@
 <div class="signup-box">
-  <h2>Sign up</h2>
-  <div class="row">
-    <div class="col">
-      <%= form_for(@user, url: sign_up_user_index_path) do |f| %>
+  <div class="row signup-background">
+    <div class="col-5">
+    </div>
+    <div class="col-7 signup-field">
+      <h2 class="dark-red">SIGN UP</h2>
+      <p>Sign Up to shop and explore Get Art</p>
+      <%= form_for(@user, url: sign_up_user_index_path, html: { onsubmit: "return validate(event)" }) do |f| %>
         <%= render partial: "error_messages", locals:{ user: @user} %>
-      
-        <div class="field">  
-          <%= f.label :full_name %><br />
-          <%= f.text_field :full_name, autocomplete: "off" %>
+        <% @step ||= :non %>
+        <% button_name = @step.to_sym == :otp_send ? "SIGN UP" : "CONTINUE" %>
+        <% case @step.to_sym %>
+        <% when :otp_send %>
+          <div class="field">
+            <div class="width-100 show-email-field">
+              <p class="float-left">Email:</p><pre class="float-left"> </pre>
+              <p class="float-left hidden-email"><%= @user.email_id %></p>
+              <p class="float-right"><%= link_to "Change?", sign_up_user_index_path, class: "light-red" %></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <div style="width:100%;">
+              <p class="float-left">OTP sent to E-mail</p>
+              <p class="light-red float-right">Resend?</p>
+            </div>
+          </div>
+          
+          <div class="field">
+            <div class="width-100">
+              <p class="float-left">Enter OTP</p>
+              <p class="float-right">
+                <%= text_field_tag 'otp[0]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
+                <%= text_field_tag 'otp[1]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
+                <%= text_field_tag 'otp[2]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
+                <%= text_field_tag 'otp[3]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
+              </p>
+            </div>
+          </div>
+          
+          <div class="field">
+            <% if User.minimum_password_length %>
+              <em>(<%= User.minimum_password_length %> characters minimum)</em><br />
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "Set Password" %>
+          </div>
+
+          <div class="field">
+            <%= f.password_field :confirm_password, autocomplete: "new-password", placeholder: "Confirm Password" %>
+          </div>
+          <%= f.hidden_field :email_id, readonly: true %>
+          <%= hidden_field_tag :step, @step %>
+        <% else %>
+          <%= f.email_field :email_id, autofocus: true, autocomplete: "email", placeholder: "E-mail" %>
+        <% end %>
+
+        <div class="field field-right">
+          <%= f.submit button_name %>
         </div>
         
-        <div class="field">
-          <%= f.label :email_id %><br />
-          <%= f.email_field :email_id, autofocus: true, autocomplete: "email" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :phone_no %><br />
-          <%= f.text_field :phone_no, autocomplete: "off" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %>
-          <% if User.minimum_password_length %>
-          <em>(<%= User.minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :confirm_password %><br />
-          <%= f.password_field :confirm_password, autocomplete: "new-password" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Sign up" %>
-          <%= link_to "Log in", login_user_index_path, class: "button-like" %><br />
+        <div class="field field-center login-link-margin">
+          <%= link_to "Existing User? LOGIN", login_user_index_path, class: "light-red bold-text" %>
         </div>
       <% end %>
     </div>
-    <div class="vl"></div>
-    <div class="col">
-      <i class="fab fa-facebook-f icon-links" style="width: 4em;height:4em;"></i>
-      <i class="fab fa-google icon-links" style="width: 4em;height:4em;"></i>
-    </div>
   </div>
 </div>
+<script>
+  function validate(e){
+    flag = true;
+    if($('.otp-field').length > 0){
+      $('.otp-field').each(function(index) {
+        if($(this).val() == ""){
+          flag = false;
+          $(this).css("border", "1px solid red");
+        };
+      });
+    }
+    return flag;
+  }
+</script>

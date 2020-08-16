@@ -21,12 +21,24 @@ class UserController < ApplicationController
     @user = User.new
     if request.post?
       @user = User.new(user_params) 
-      if @user.save
-        session[:user_id] = @user.id
-        flash[:notice] = "Welcome #{@user.full_name}"
-        redirect_to :root
+      unless params[:step].present?
+        p session[:otp] = rand.to_s[2..5]
+        @user.send_otp_by_mail(session[:otp])
+        @step = :otp_send
       else
-        render action: :sign_up
+        otp = params[:otp].values.join
+        if session[:otp] == otp
+          if @user.save
+            session[:otp] = nil
+            session[:user_id] = @user.id
+            flash[:notice] = "Welcome #{@user.full_name}"
+            redirect_to :root
+          end
+        else
+          flash[:error] = "Wrong OTP. Click here to Resend OTP"
+          @step = :otp_send
+          render action: :sign_up
+        end
       end
     end
   end
@@ -34,6 +46,10 @@ class UserController < ApplicationController
   def logout
     reset_session
     redirect_to :root
+  end
+  
+  def dashboard
+    @user_detail= @current_user.user_detail
   end
   
   private
