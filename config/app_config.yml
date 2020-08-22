@@ -1,0 +1,16 @@
+mail_config:
+  address: "address" # smtp.gmail.com if gmail
+  port: 587
+  domain: "domain" # smtp.gmail.com if gmail
+  user_name: "example@example.com"
+  password: "password"
+  authentication: "plain"
+  enable_starttls_auto: true
+host_config:
+  host_url: "domain" #without https://www.
+links:
+  facebook: "www.facebook.com"
+  twitter: "www.twitter.com"
+  linkedin: "www.linkedin.com"
+  github: "www.github.com"
+  blog: ""

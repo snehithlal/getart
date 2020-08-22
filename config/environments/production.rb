@@ -61,6 +61,21 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "getart_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  host =  AppConfig["host_config"]["host_url"]
+  config.action_mailer.default_url_options = { host: host }
+  
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    address: AppConfig["mail_config"]["address"],
+    port: AppConfig["mail_config"]["port"],
+    domain: AppConfig["mail_config"]["domain"],
+    user_name: AppConfig["mail_config"]["user_name"],
+    password: AppConfig["mail_config"]["password"],
+    authentication: AppConfig["mail_config"]["authentication"],
+    enable_starttls_auto: AppConfig["mail_config"]["enable_starttls_auto"]
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

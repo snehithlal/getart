@@ -21,25 +21,45 @@ class UserController < ApplicationController
     @user = User.new
     if request.post?
       @user = User.new(user_params) 
-      unless params[:step].present?
-        p session[:otp] = rand.to_s[2..5]
-        @user.send_otp_by_mail(session[:otp])
-        @step = :otp_send
-      else
-        otp = params[:otp].values.join
-        if session[:otp] == otp
-          if @user.save
-            session[:otp] = nil
-            session[:user_id] = @user.id
-            flash[:notice] = "Welcome #{@user.full_name}"
-            redirect_to :root
-          end
-        else
-          flash[:error] = "Wrong OTP. Click here to Resend OTP"
+      #change to job
+      check_user_exists = User.find_by_email_id(@user.email_id).present?
+      unless check_user_exists
+        unless params[:step].present?
+          session[:otp][:code] = rand.to_s[2..5]
+          session[:otp][:sent_time] = Time.now
+          @user.send_otp_by_mail(session[:otp][:code])
           @step = :otp_send
-          render action: :sign_up
+        else
+          otp = params[:otp].values.join
+          if session[:otp][:code] == otp
+            if @user.save
+              session[:otp] = nil
+              session[:user_id] = @user.id
+              flash[:notice] = "Welcome #{@user.full_name}"
+              redirect_to :root
+            end
+          else
+            #replace click here
+            flash[:error] = "Wrong OTP. Click here to Resend OTP"
+            @step = :otp_send
+            render action: :sign_up
+          end
         end
+      else
+        #replace click here
+        flash[:error] = "Account exist. Click here to login or Click here to reset password"
+        redirect_to action: :sign_up
       end
+    end
+  end
+  
+  def sent_otp
+    time_diff = Time.now.to_time - session[:otp][:sent_time].to_time
+    if time_diff.to_i > 120
+      session[:otp][:code] = rand.to_s[2..5]
+      session[:otp][:sent_time] = Time.now
+      #change to job
+      @user.send_otp_by_mail(session[:otp][:code])
     end
   end
   

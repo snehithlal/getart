@@ -22,7 +22,7 @@
           <div class="field">
             <div style="width:100%;">
               <p class="float-left">OTP sent to E-mail</p>
-              <p class="light-red float-right">Resend?</p>
+              <p class="otp-timer light-red float-right">Resend OTP in <span id="sec-timer">120</span> seconds</p>
             </div>
           </div>
           
@@ -55,7 +55,7 @@
         <% end %>
 
         <div class="field field-right">
-          <%= f.submit button_name %>
+          <%= f.submit button_name, class: "submit_button" %>
         </div>
         
         <div class="field field-center login-link-margin">

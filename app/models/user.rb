@@ -21,6 +21,7 @@ class User < ApplicationRecord
   end
   
   def send_otp_by_mail(otp)
+    UserMailer.with(user: self, otp: otp).send_otp.deliver_now
   end
   
   def self.minimum_password_length

@@ -46,6 +46,7 @@ $(function(){
      }else{
        $(this).next('.otp-field').focus();
        $(this).css("border", "2px solid lightgrey");
+       $('input[type="submit"]').attr("disabled", false);
      }
    })
 })
