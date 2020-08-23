@@ -1,0 +1,2 @@
+class ArtEra < ApplicationRecord
+end
