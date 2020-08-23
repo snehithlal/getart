@@ -21,10 +21,10 @@ class UserController < ApplicationController
     @user = User.new
     if request.post?
       @user = User.new(user_params) 
-      #change to job
       check_user_exists = User.find_by_email_id(@user.email_id).present?
       unless check_user_exists
         unless params[:step].present?
+          session[:otp] = {}
           session[:otp][:code] = rand.to_s[2..5]
           session[:otp][:sent_time] = Time.now
           @user.send_otp_by_mail(session[:otp][:code])
