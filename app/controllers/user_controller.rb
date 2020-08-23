@@ -25,7 +25,7 @@ class UserController < ApplicationController
       unless check_user_exists
         unless params[:step].present?
           session[:otp] = {}
-          session[:otp][:code] = rand.to_s[2..5]
+          p session[:otp][:code] = rand.to_s[2..5]
           session[:otp][:sent_time] = Time.now
           @user.send_otp_by_mail(session[:otp][:code])
           @step = :otp_send
@@ -56,7 +56,7 @@ class UserController < ApplicationController
   def sent_otp
     time_diff = Time.now.to_time - session[:otp][:sent_time].to_time
     if time_diff.to_i > 120
-      session[:otp][:code] = rand.to_s[2..5]
+      p session[:otp][:code] = rand.to_s[2..5]
       session[:otp][:sent_time] = Time.now
       #change to job
       @user.send_otp_by_mail(session[:otp][:code])
