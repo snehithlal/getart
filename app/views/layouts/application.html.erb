@@ -15,7 +15,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand get-art col-7" href="#">Get Art</a>
+        <a class="navbar-brand get-art col-9" href="#">Get Art</a>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <form class="form-inline mt-2 mt-md-0">
             <div class="search-icon"><%= fa_icon('search') %></div>
@@ -39,8 +39,10 @@
         </div>
       </nav>
     </div>
-    <div class="container main-container">
+    <div class="main-container">
      <%= yield %>
+    </div>
+
       <footer class="footer">
         <div class="quote">
           <blockquote class="blockquote mb-0">
@@ -79,6 +81,5 @@
           </div>
         </div>
       </footer>
-    </div>
   </body>
 </html>

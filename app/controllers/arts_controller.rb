@@ -1,7 +1,7 @@
 class ArtsController < ApplicationController
 
     def index
-        @arts = "Hiii"
+        @categories = Category.all
     end
     
 end
