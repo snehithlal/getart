@@ -1,0 +1,31 @@
+<div class="signin-box">
+  <div class="row login-background">
+    <div class="col-5">
+    </div>
+    <div class="col-7 login-field">
+      <h2 class="dark-red">LOGIN</h2>
+      <p>Get safe access to your Get Art Account</p>
+      <%= form_for(@user, url: login_user_index_path) do |f| %>
+        <div class="field">
+          <%= f.email_field :email_id, autofocus: true, autocomplete: "off", placeholder: "E-mail" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Enter Password" %>
+        </div>
+        
+        <div class="field field-right">
+          <%= link_to "Forgot the password?", sign_up_user_index_path, class: "light-red" %>
+        </div>
+
+        <div class="field field-right">
+          <%= f.submit "LOGIN" %>
+        </div>
+        
+        <div class="field field-center signup-link-margin">
+          <%= link_to "New to Get Art? Create an Account", sign_up_user_index_path, class: "light-red bold-text" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
