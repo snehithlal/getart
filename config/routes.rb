@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       post :sign_up
       get :logout
       get :dashboard
+      get :resend_otp
+      get :forgot_password
+      post :forgot_password
+      patch :forgot_password
     end
   end
   root 'arts#index'

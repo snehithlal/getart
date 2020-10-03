@@ -1,9 +1,7 @@
 <% if user.errors.any? %>
   <div id="error_explanation">
     <h2>
-      <%= I18n.t("errors.messages.not_saved", count: user.errors.count,
-          resource: user.class.model_name.human.downcase)
-       %>
+      User not created due to the following errors(<%= user.errors.count %>):
     </h2>
     <ul>
       <% user.errors.full_messages.each do |message| %>
@@ -14,6 +12,6 @@
 <% end %>
 <% if flash[:error].present? %>
   <div class="flash-msg-box">
-    <%= flash[:error] %>
+    <%= flash[:error].html_safe %>
   </div>
 <% end %>

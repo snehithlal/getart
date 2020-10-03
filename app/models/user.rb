@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  attr_accessor :full_name, :password, :confirm_password
-  validates_presence_of :password, :email_id#,:full_name, :phone_no
+  attr_accessor :full_name, :password, :confirm_password, :dont_validate_password
+  validates_presence_of :email_id#,:full_name, :phone_no
+  validates_presence_of :password, if: Proc.new{|user| user.dont_validate_password != false}
   validates_presence_of :confirm_password, if: Proc.new{|user| user.new_record?}
   validate :password_match, if: Proc.new{|user| user.password.present?}
   validates :email_id, uniqueness: { scope: :is_active,
@@ -8,7 +9,7 @@ class User < ApplicationRecord
   # validates :phone_no, numericality: true, length: { minimum: 10, maximum: 10 }
   has_one :user_detail, dependent: :destroy
   after_create :create_user_detail
-  before_save :hash_password
+  before_save :hash_password, if: Proc.new{|user| user.dont_validate_password != false}
   
   scope :active, -> { where(is_active: true) }
   
@@ -24,6 +25,12 @@ class User < ApplicationRecord
     UserMailer.with(user: self, otp: otp).send_otp.deliver_now
   end
   
+  def send_password_reset_token_by_mail
+    p self.update(reset_password_token: SecureRandom.base64(17), dont_validate_password: false)
+    p self.errors.full_messages
+    UserMailer.with(user: self).send_password_reset_token.deliver_now
+  end
+  
   def self.minimum_password_length
     false
   end
@@ -32,7 +39,7 @@ class User < ApplicationRecord
   
     def password_match
       if password != confirm_password
-        errors.add(:password, "Password doesn't match")
+        errors.add(:password, "doesn't match")
       end
     end
     

@@ -8,9 +8,9 @@
       <%= form_for(@user, url: sign_up_user_index_path, html: { onsubmit: "return validate(event)" }) do |f| %>
         <%= render partial: "error_messages", locals:{ user: @user} %>
         <% @step ||= :non %>
-        <% button_name = @step.to_sym == :otp_send ? "SIGN UP" : "CONTINUE" %>
+        <% button_name = (@step.to_sym == :otp_send || @step.to_sym == :password_not_match) ? "SIGN UP" : "CONTINUE" %>
         <% case @step.to_sym %>
-        <% when :otp_send %>
+        <% when :otp_send, :password_not_match %>
           <div class="field">
             <div class="width-100 show-email-field">
               <p class="float-left">Email:</p><pre class="float-left"> </pre>
@@ -22,7 +22,10 @@
           <div class="field">
             <div style="width:100%;">
               <p class="float-left">OTP sent to E-mail</p>
-              <p class="otp-timer light-red float-right">Resend OTP in <span id="sec-timer">120</span> seconds</p>
+              <p id="time-holder" class="otp-timer light-red float-right">
+                <%= t(:didnt_receive_the_code) %>? <%= t(:send_code_again_in) %>
+                <span id="sec-timer"><%= @time %></span>  <%= t(:seconds) %>
+              </p>
             </div>
           </div>
           
@@ -65,6 +68,7 @@
     </div>
   </div>
 </div>
+<div id="dummy-otp"><%= session[:otp]["code"] %></div>
 <script>
   function validate(e){
     flag = true;
@@ -76,6 +80,52 @@
         };
       });
     }
+    if($('#user_password').val() == ""){
+      flag = false;
+      $('#user_password').css("border", "1px solid red");
+    }
+    if($('#user_password').val() == ""){
+      flag = false;
+      $('#user_confirm_password').css("border", "1px solid red");
+    }
     return flag;
+  }
+  
+  window.onload = function() {
+    <% sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
+    <% if @step.to_sym == :otp_send || @step.to_sym == :password_not_match %>
+      var x;
+      clearInterval(x);
+      start('<%= sent_time_in_rails %>');
+    <% end %>
+  };
+
+  function change_time(sent_time_in_rails){
+    var sec_timer = document.getElementById("sec-timer");
+    var time_holder = document.getElementById("time-holder");
+    var sec_time;
+    if(sec_timer != null){
+      var sent_time = new Date(sent_time_in_rails)
+      var time_diff = parseInt((new Date() - sent_time)/1000);
+      var sec_time = parseInt(sec_timer.innerHTML);
+      if((sec_time == 0) && (120 - time_diff <= 0)){
+        clearInterval(x);
+        time_holder.innerHTML = '<%= link_to t(:resend_otp), resend_otp_user_index_path, remote: true %>';
+        $(time_holder).find('a').attr("href", $(time_holder).find('a').attr("href") + "?email_id=" + $('#user_email_id').val());
+      }else{
+        if((120 - time_diff) > sec_time + 5){
+          sec_time = 120 - time_diff;
+        }else{
+          sec_time = sec_time - 1;
+        }
+        sec_timer.innerHTML = sec_time;
+      }
+    }
+  }
+  
+  function start(sent_time_in_rails){
+    x = setInterval(function(){
+      change_time(sent_time_in_rails)
+    }, 1000);
   }
 </script>
