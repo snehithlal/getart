@@ -10,5 +10,7 @@ Rails.application.routes.draw do
       get :dashboard
     end
   end
+
+  resources :products
   root 'arts#index'
 end

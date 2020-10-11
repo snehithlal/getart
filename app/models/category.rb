@@ -1,4 +1,6 @@
 class Category < ApplicationRecord
+
+  has_many :products
   has_many :subcategories
   has_many :minorcategories, through: :subcategories
   accepts_nested_attributes_for :subcategories
