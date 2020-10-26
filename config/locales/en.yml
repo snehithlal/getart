@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  submit: "Submit"
+  tell_us: "Tell us about your work"
+  name_your_work: "Name your work"

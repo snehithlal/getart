@@ -1,3 +1,19 @@
-<% @categories.each do |category| %>
-    <div class="col-1 category"%><%= category.name.upcase %> </div>
-<% end %>
+<div class="category-dropdown">
+  <% @categories.each do |category| %>
+  <div class="dropdown category">
+    <div class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= category.name.upcase %>
+    </div>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% category.subcategories.each do |subcategory| %>
+      <a class="dropdown-item" href="#"><%= subcategory.name %></a>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+  <div class="dropdown category">
+    <div class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= "SELL ART" %>
+    </div>
+  </div>
+</div>

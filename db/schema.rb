@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_03_060216) do
+ActiveRecord::Schema.define(version: 2020_10_25_154955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_10_03_060216) do
   create_table "minorcategories", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.bigint "subcategory_id", null: false
+    t.bigint "subcategory_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["subcategory_id"], name: "index_minorcategories_on_subcategory_id"
@@ -70,9 +70,10 @@ ActiveRecord::Schema.define(version: 2020_10_03_060216) do
     t.bigint "medium_id"
     t.bigint "material_id"
     t.bigint "art_era_id"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.json "images"
     t.index ["art_era_id"], name: "index_products_on_art_era_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["material_id"], name: "index_products_on_material_id"
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 2020_10_03_060216) do
   create_table "subcategories", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.bigint "category_id", null: false
+    t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_subcategories_on_category_id"
