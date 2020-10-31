@@ -22,6 +22,3 @@ module Getart
     # the framework and any gems in your application.
   end
 end
-if File.exist?("#{Rails.root}/config/app_config.yml")
-  AppConfig = Psych.safe_load(File.open("#{Rails.root}/config/app_config.yml"), aliases: true)
-end

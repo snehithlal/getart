@@ -9,11 +9,12 @@ class UserController < ApplicationController
       if @user.authenticate
         user = User.active.where("email_id = ?", @user.email_id).first
         session[:user_id] = user.id
-        flash[:notice] = "Welcome #{user.user_detail.full_name}" 
+        flash[:notice] = "Welcome #{user.user_detail.full_name}"
+        redirect_to session[:back_path], fallback_location: root_path
       else
         flash[:danger] = "Wrong Credentials"
+        redirect_to action: :login
       end
-      redirect_to :root
     end
   end
   
@@ -33,7 +34,6 @@ class UserController < ApplicationController
               session[:otp] = nil
               session[:user_id] = @user.id
               flash[:notice] = "Welcome #{@user.full_name}"
-              redirect_to :root
             else
               @time = (120 - (Time.now.to_time - session[:otp]["sent_time"].to_time)).to_i
               @step = "password_not_match"
@@ -113,6 +113,9 @@ class UserController < ApplicationController
         end
       end
     end
+  end
+  
+  def edit
   end
   
   private

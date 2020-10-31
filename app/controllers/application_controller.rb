@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     end
     
     def login_required
-      redirect_to login_user_index_path unless session[:user_id].present?
+      unless session[:user_id].present?
+        back_path = request.path.split("/").select {|x| x.present?}
+        session[:back_path] = url_for(controller: back_path[0], action: back_path[1]) 
+        redirect_to login_user_index_path
+      end
     end
 end

@@ -28,9 +28,9 @@ class User < ApplicationRecord
   end
   
   def send_password_reset_token_by_mail
-    p self.update(reset_password_token: SecureRandom.base64(17), dont_validate_password: false)
-    p self.errors.full_messages
-    UserMailer.with(user: self).send_password_reset_token.deliver_now
+    if self.update(reset_password_token: SecureRandom.base64(17).gsub(/[+, =, \/]/,""), dont_validate_password: false)
+      UserMailer.with(user: self).send_password_reset_token.deliver_now
+    end
   end
   
   def self.minimum_password_length
