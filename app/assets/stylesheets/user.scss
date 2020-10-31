@@ -100,13 +100,12 @@
 // Dashboard
 .grid-container{
   display: grid;
-  grid-template-columns: 2fr 3.5fr;
+  grid-template-columns: 2fr 4fr;
   margin: 5% auto;
-  margin-top: 10%;
 }
 
 .col-user-img, .user-actions-container{
-  padding: 5% 15%;
+  padding: 5% 20%;
 }
 
 .grey-color-container{
@@ -181,6 +180,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10%;
+  padding: 5% 15%;
+  padding-right: 25%;
 }
 
 .user-actions-container a, .user-actions-container a:hover{
@@ -200,7 +201,7 @@
 
 .action-img{
   display: flex;
-  width: 40%;
+  width: 30%;
 }
 
 .action-img img{
@@ -208,7 +209,7 @@
 }
 
 .action-hreader-des{
-  width: 60%;
+  width: 70%;
   padding: 5% 10%;
   padding-left: 5%;
 }
