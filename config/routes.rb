@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       get :forgot_password
       post :forgot_password
       patch :forgot_password
+      get :complete_signup
+      patch :complete_signup
     end
   end
 

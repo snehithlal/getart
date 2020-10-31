@@ -12,10 +12,16 @@
         <% case @step.to_sym %>
         <% when :otp_send, :password_not_match %>
           <div class="field">
-            <div class="width-100 show-email-field">
-              <p class="float-left email-label">Email:</p><pre class="float-left"> </pre>
-              <p class="float-left hidden-email"><%= @user.email_id %></p>
-              <p class="float-right"><%= link_to "Change?", sign_up_user_index_path, class: "light-red change-link" %></p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text left-input-group-text">Email :</span>
+              </div>
+              <%= text_field_tag :email_id, @user.email_id, disabled: true, class: "form-control email-shower" %>
+              <div class="input-group-append">
+                <span id="set-password-visibility" class="input-group-text right-input-group-text">
+                  <%= link_to "Change?", sign_up_user_index_path, class: "light-red change-link" %>
+                </span>
+              </div>
             </div>
           </div>
 
@@ -90,7 +96,7 @@
     </div>
   </div>
 </div>
-<div id="dummy-otp"><%= session[:otp]["code"] %></div>
+<div id="dummy-otp"><%= session[:otp].present? ? session[:otp]["code"] : nil %></div>
 <script>
   function validate(e){
     flag = true;
@@ -113,14 +119,16 @@
     return flag;
   }
   
-  window.onload = function() {
-    <% sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
-    <% if @step.to_sym == :otp_send || @step.to_sym == :password_not_match %>
-      var x;
-      clearInterval(x);
-      start('<%= sent_time_in_rails %>');
-    <% end %>
-  };
+  <% if session[:otp].present? %>
+    window.onload = function() {
+      <% sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
+      <% if @step.to_sym == :otp_send || @step.to_sym == :password_not_match %>
+        var x;
+        clearInterval(x);
+        start('<%= sent_time_in_rails %>');
+      <% end %>
+    };
+  <% end %>
 
   function change_time(sent_time_in_rails){
     var sec_timer = document.getElementById("sec-timer");

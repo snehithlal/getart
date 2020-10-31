@@ -6,6 +6,7 @@
       <h2 class="dark-red">LOGIN</h2>
       <p>Get safe access to your Get Art Account</p>
       <%= form_for(@user, url: login_user_index_path) do |f| %>
+        <%= render partial: "error_messages", locals:{ user: @user} %>
         <div class="field">
           <%= f.email_field :email_id, autofocus: true, autocomplete: "off", placeholder: "E-mail" %>
         </div>
