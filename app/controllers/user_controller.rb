@@ -34,6 +34,7 @@ class UserController < ApplicationController
             if @user.save
               session[:otp] = nil
               session[:user_id] = @user.id
+              redirect_to :root
             else
               @time = (120 - (Time.now.to_time - session[:otp]["sent_time"].to_time)).to_i
               @step = "password_not_match"
