@@ -1,50 +1,82 @@
-<div class="row">
-  <div class="col-4">
-    <div class="test1">
-      <div style="text-align:right;width: 100%;">Edit</div>
-      <div style="text-align:center;width: 100%;">
-        <img src="https://www.clipartmax.com/png/full/144-1442578_flat-person-icon-download-dummy-man.png" width="150px" height="150px">
-        </img>
+<div class="grid-container">
+  <div class="col-user-img">
+    <div class="user-img-container grey-color-container">
+      <div class="edit-container"><%= link_to "Edit", logout_user_index_path %></div>
+      <div class="user-img">
+        <%= image_tag @user_detail.avatar.url %>
       </div>
-      <div style="text-align:center;width: 100%;"><%= @user_detail.full_name %></div>
-      <div style="text-align:center;width: 100%;"><%= @user_detail.email_id %></div>
-      <div style="text-align:center;width: 100%;"><%= @user_detail.phone_no %></div>
-      <div style="text-align:center;width: 100%;"><%= link_to "Log out", logout_user_index_path %></div>
+      <div class="name-container"><%= @user_detail.full_name.presence || "(Full Name)" %></div>
+      <div class="email-container"><%= @user_detail.email_id %></div>
+      <div class="phone-no-container"><%= @user_detail.phone_no.presence || "(Phone no.)" %></div>
+      <div class="log-out-container"><%= link_to "Log out", logout_user_index_path %></div>
     </div>
   </div>
-  <div class="col-8">
-    <div>
-      <div class="row">
-        <div class="col">
-          <div class="test1">My Orders</div>
+  <div class="user-actions-container">
+    <%= link_to "#" do %>
+      <div class="user-action-container grey-color-container">
+        <div class="action-img">
+          <%= image_tag "my_orders.svg" %>
         </div>
-        <div class="col">
-          <div class="test1">My Addresses</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="test1">Payment Options</div>
-        </div>
-        <div class="col">
-          <div class="test1">Security</div>
+        <div class="action-hreader-des">
+          <h5>Orders</h5>
+          <p>Track Return Repeat buy</p>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <div class="test1">Coupons</div>
+    <% end %>
+    <%= link_to "#" do %>
+      <div class="user-action-container grey-color-container">
+        <div class="action-img">
+          <%= image_tag "my_addresses.svg" %>
         </div>
-        <div class="col">
-          <div class="test1">Help</div>
+        <div class="action-hreader-des">
+          <h5>Addresses</h5>
+          <p>Add Edit Remove</p>
         </div>
       </div>
-    </div>
+    <% end %>
+    <%= link_to "#" do %>
+      <div class="user-action-container grey-color-container">
+        <div class="action-img">
+          <%= image_tag "payment_options.svg" %>
+        </div>
+        <div class="action-hreader-des">
+          <h5>Payment Options</h5>
+          <p>Add Edit Remove</p>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to "#" do %>
+      <div class="user-action-container grey-color-container">
+        <div class="action-img">
+          <%= image_tag "security.svg" %>
+        </div>
+        <div class="action-hreader-des">
+          <h5>Security</h5>
+          <p>Personal Details and Password</p>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to "#" do %>
+      <div class="user-action-container grey-color-container">
+        <div class="action-img">
+          <%= image_tag "coupons.svg" %>
+        </div>
+        <div class="action-hreader-des">
+          <h5>Coupons</h5>
+          <p>Manage Coupons</p>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to "#" do %>
+      <div class="user-action-container grey-color-container">
+        <div class="action-img">
+          <%= image_tag "help.svg" %>
+        </div>
+        <div class="action-hreader-des">
+          <h5>Help</h5>
+          <p>Get in touch with us</p>
+        </div>
+      </div>
+    <% end %> 
   </div>
 </div>
-
-<style>
-  .test1{
-    background-color: #F0F5F9;
-    border-radius: 40px;
-  }
-</style>
