@@ -117,6 +117,10 @@ class UserController < ApplicationController
   
   def edit
   end
+
+  def register_as_seller
+
+  end
   
   private
     def user_params

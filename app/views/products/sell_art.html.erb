@@ -1,0 +1,45 @@
+<div class="register-img">
+  <div class="register-head">
+    <p>SELL ART ON GET ART</p>
+    <p>Get best value for your creations</p>
+  </div>
+  <%= button_to "REGISTER NOW", register_as_seller_user_index_path, class: "register-button" %>
+</div>
+
+<div class="get-art-details">
+  <div class="row">
+    <div class="col">
+      <p class="main-head">WHY SELL YOUR ART ON GET ART</p>
+      <div class="row register-card">
+        <div class="col-3">
+          <%= image_tag "register-icons/expand", size: "131"%>
+        </div>
+        <div class="col-9">
+          <p class="h4 detail-title">Expand Your Reach</p>
+          <p> <%= t('expand_your_reach_desc') %> </p>
+        </div>
+      </div>
+      <div class="row register-card">
+        <div class="col-3">
+          <%= image_tag "register-icons/bonus", size: "131"%>
+        </div>
+        <div class="col-9">
+          <p class="h4 detail-title">We Do the Marketing</p>
+          <p> <%= t('we_do_the_marketing_desc') %> </p>
+        </div>
+      </div>
+            <div class="row register-card">
+      <div class="col-3">
+          <%= image_tag "register-icons/money", size: "131"%>
+        </div>
+        <div class="col-9">
+          <p class="h4 detail-title">Supplement Your Income</p>
+          <p> <%= t('suppliment_your_income_desc') %> </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <p class="main-head">HOW TO SELL ON GET ART</p>
+    </div>
+  </div>
+</div>

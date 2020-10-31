@@ -13,3 +13,47 @@
   font-weight: bold;
   color:#931717;
 } 
+
+.register-img{
+  height: 310px;
+  width: 100%;
+  background: url('seller-registration') 0% 0% no-repeat;
+  background-size: 95% 100%;
+  background-position: center;
+}
+
+.register-head {
+  font-size: 35px;
+  font-weight: bold;
+  margin-left: 135px;
+  padding-top: 35px;
+}
+
+.register-button{
+  float: right;
+  background: #C9D6DF;
+  color: #900D0D;
+  border-radius: 4px;
+  width: 226px;
+  height: 43px;
+  margin-right: 100px;
+  margin-top: 50px;
+}
+
+.detail-title {
+  font-weight: bold !important;
+}
+
+.main-head {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 33px 0px;
+}
+
+.register-card {
+  margin: 33px 0px;
+}
+
+.get-art-details {
+  margin: 0px 70px;
+}

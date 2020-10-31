@@ -19,6 +19,9 @@ class ProductsController < ApplicationController
     end
     redirect_to action: "new"
   end
+
+  def sell_art
+  end
   
   private
 

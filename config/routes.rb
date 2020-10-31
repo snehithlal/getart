@@ -12,9 +12,14 @@ Rails.application.routes.draw do
       get :forgot_password
       post :forgot_password
       patch :forgot_password
+      post :register_as_seller
     end
   end
 
-  resources :products
+  resources :products do
+    collection do
+      get :sell_art
+    end
+  end
   root 'arts#index'
 end
