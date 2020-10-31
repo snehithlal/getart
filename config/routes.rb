@@ -13,6 +13,8 @@ Rails.application.routes.draw do
       post :forgot_password
       patch :forgot_password
       post :register_as_seller
+      get :complete_signup
+      patch :complete_signup
     end
   end
 

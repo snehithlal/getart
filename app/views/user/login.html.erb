@@ -6,16 +6,17 @@
       <h2 class="dark-red">LOGIN</h2>
       <p>Get safe access to your Get Art Account</p>
       <%= form_for(@user, url: login_user_index_path) do |f| %>
+        <%= render partial: "error_messages", locals:{ user: @user} %>
         <div class="field">
-          <%= f.email_field :email_id, autofocus: true, autocomplete: "off", placeholder: "E-mail" %>
+          <%= f.email_field :email_id, autofocus: true, autocomplete: "off", placeholder: "E-mail", required: true %>
         </div>
 
         <div class="field">
-          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Enter Password" %>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Enter Password", required: true %>
         </div>
         
         <div class="field field-right">
-          <%= link_to "Forgot the password?", forgot_password_user_index_path, class: "light-red" %>
+          <%= link_to "Forgot the password?", forgot_password_user_index_path, class: "forgot-password light-red" %>
         </div>
 
         <div class="field field-right">
@@ -23,7 +24,7 @@
         </div>
         
         <div class="field field-center signup-link-margin">
-          <%= link_to "New to Get Art? Create an Account", sign_up_user_index_path, class: "light-red bold-text" %>
+          <%= link_to "New to Get Art? Create an Account", sign_up_user_index_path, class: "light-red bold-text signup-link" %>
         </div>
       <% end %>
     </div>

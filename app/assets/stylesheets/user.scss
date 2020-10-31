@@ -4,7 +4,7 @@
 
 .field{
   width: 100%;
-  padding: 0.5em 0;
+  padding: 2% 0;
   display: flow-root;
 }
 
@@ -29,46 +29,131 @@
 }
 
 .otp-field{
-  width: 3em !important;
-  height: 3em !important;
+  width: 12.5% !important;
+  height: auto !important;
+  padding: 3% !important;
+  margin: 0 1%;
 }
 
 .signin-box .login-background, .signup-box .signup-background{
-  background-color: #F0F5F9;
-  margin: 10em;
-  padding: 1.5em;
+	background-color: #F0F5F9;
+	margin: 10% 20%;
+	padding: 2%;
+	width: 60%;
+	margin-bottom: 5%;
 }
 
 .signin-box h2, .signup-box h2{
-  font-size: 1.5em;
-  font-weight: bold;
+  font: normal normal bold 30px/41px Arial;
+  letter-spacing: 0px;
+  color: #900D0D;
+  opacity: 1;
+}
+
+.signin-box p, .signup-box p{
+  font: normal normal medium 14px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #1E2022;
+  opacity: 1;
+}
+
+.new_user{
+  margin-top: 10%;
+}
+
+.forgot-password{
+  font: normal normal medium 16px/21px Montserrat;
+  letter-spacing: 0px;
+  color: #CF1B1B;
+  opacity: 1;
+}
+
+.signup-link, .login-link{
+  font: normal normal 600 16px/21px Montserrat;
+  letter-spacing: 0px;
+  color: #CF1B1B;
+  opacity: 1;
 }
 
 .signin-box .login-field, .signup-box .signup-field{
-  padding-right: 4em;
+  padding-right: 10%;
 }
 
-.signin-box input[type="text"], .signin-box input[type="email"], .signin-box input[type="password"],
-.signup-box input[type="text"], .signup-box input[type="email"], .signup-box input[type="password"]{
-  border-radius: 5px;
-  border: 2px solid lightgrey;
-  background-color: white;
-  padding: 4px 15px;
+.signin-box input[type="text"], .signin-box input[type="email"],
+.signin-box input[type="password"], .signup-box input[type="text"],
+.signup-box input[type="email"], .signup-box input[type="password"],
+.signup-password-field:focus{
+  padding: 1.5% 3%;
   width: 100%;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 0.15000000596046448px solid #52616B;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.email-shower, .email-shower:focus,
+.signup-password-field, .signup-password-field:focus{
+  width: 1% !important;
+  padding: 3% !important;
+}
+
+.email-shower, .email-shower:focus{
+  padding: 3% 0 !important;
+  font: normal normal medium 14px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #C9D6DF !important;
+  opacity: 1;
+}
+
+.form-control:focus{
+  box-shadow: none !important;
+}
+
+.input-group-text{
+  font: normal normal medium 16px/21px Montserrat !important;
+  letter-spacing: 0px;
+  color: #52616B !important;
+  opacity: 1;
+  background: #FFFFFF 0% 0% no-repeat padding-box !important;
+  border: 0.15000000596046448px solid #52616B !important;
+  border-radius: 4px !important;
+}
+
+.email-shower, .signup-password-field, .left-input-group-text{
+  border-right: none !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.email-shower, .signup-password-field, .right-input-group-text{
+  border-left: none !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 .signin-box input[type="submit"], .signup-box input[type="submit"], .button-like,{
   border-radius: 5px;
   border: 2px solid #B6BFC4;
   background-color: #B6BFC4;
-  color: black;
-  padding: 4px 40px;
-  margin: 10px auto;
+  padding: 1% 10%;
+  margin: 1% auto;
   text-decoration: none;
+  font: normal normal medium 16px/21px Montserrat;
+  letter-spacing: 0px;
+  color: #1E2022;
+  opacity: 1;
+}
+
+::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, 
+:-ms-input-placeholder, ::-ms-input-placeholder, ::placeholder{
+  font: normal normal medium 16px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #C9D6DF;
+  opacity: 1;
 }
 
 .signin-box .signup-link-margin, .signup-box .login-link-margin{
-  margin-top: 5em;
+  margin-top: 10%;
 }
 
 .signin-box a:hover, .signup-box a:hover,{
@@ -81,20 +166,98 @@
   text-decoration: none;
 }
 
-.show-email-field{
-  display: flow-root;
-  background: white;
-  border: 2px solid lightgrey;
-  border-radius: 5px;
-  padding: 0 10px;
+.change-link{
+  font: normal normal normal 14px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #CF1B1B;
+  opacity: 1;
 }
 
-.show-email-field p, .show-email-field pre{
-  margin: 5px auto;
+.otp-sent-label{
+  font: normal normal medium 14px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #1E2022;
+  opacity: 1;
 }
 
-.hidden-email{
-  color: lightgrey;
+.otp-timer, .otp-timer a{
+  font: normal normal normal 14px/19px Montserrat;
+  letter-spacing: 0px;
+  color: #CF1B1B !important;
+  opacity: 1;
+  padding: 0.5% 0;
+}
+
+.otp-field-container{
+  display: flex;
+  align-items: center;
+}
+
+.otp-field-container .otp-label{
+  text-align: left;
+  font: normal normal medium 16px/21px Montserrat;
+  letter-spacing: 0px;
+  color: #52616B;
+  opacity: 1;
+  padding-right: 5%;
+  width: 25%;
+}
+
+.otp-fields{
+  width: 75%;
+}
+
+.change-visibility:hover{
+  cursor: pointer;
+}
+
+.make-invisibile{
+  display: none;
+}
+
+.complete-signup-field .field{
+  display: flex;
+  align-items: center;
+}
+
+.complete-signup-field .field label{
+  width: 30%;
+  float: left;
+  margin-bottom: 0;
+  font: normal normal medium 16px/21px Montserrat;
+  letter-spacing: 0px;
+  color: #1E2022;
+  opacity: 1;
+}
+
+.complete-signup-field .field input[type="text"]{
+  padding: 2% 5%;
+  width: 70%;
+  float: left;
+  text-align: left;
+  font: normal normal bold 20px/25px Montserrat;
+  letter-spacing: 0px;
+  color: #1E2022;
+  opacity: 1;
+}
+
+.complete-signup-field ::-webkit-input-placeholder,
+.complete-signup-field :-moz-placeholder, 
+.complete-signup-field ::-moz-placeholder, 
+.complete-signup-field :-ms-input-placeholder,
+.complete-signup-field ::-ms-input-placeholder,
+.complete-signup-field ::placeholder{
+  text-align: left;
+  font: normal normal bold 20px/25px Montserrat;
+  letter-spacing: 0px;
+  color: #C9D6DF;
+  opacity: 1;
+}
+
+.complete-signup-submit-field{
+  display: flow-root !important;
+  margin: 10% auto;
+  margin-bottom: 0;
 }
 
 // Dashboard

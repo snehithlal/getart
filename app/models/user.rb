@@ -2,17 +2,15 @@ class User < ApplicationRecord
   has_one :user_detail, dependent: :destroy
   has_many :products
   
-  attr_accessor :full_name, :password, :confirm_password, :dont_validate_password
-  validates_presence_of :email_id#,:full_name, :phone_no
+  attr_accessor :password, :confirm_password, :dont_validate_password
+  validates_presence_of :email_id
   validates_presence_of :password, if: Proc.new{|user| user.dont_validate_password != false}
   validates_presence_of :confirm_password, if: Proc.new{|user| user.new_record?}
   validate :password_match, if: Proc.new{|user| user.password.present?}
   validates :email_id, uniqueness: { scope: :is_active,
       message: "can have only one active per time." }, if: Proc.new{|user| user.new_record?} #:phone_no
-  # validates :phone_no, numericality: true, length: { minimum: 10, maximum: 10 }
-  after_create :create_user_detail
   before_save :hash_password, if: Proc.new{|user| user.dont_validate_password != false}
-  
+   
   scope :active, -> { where(is_active: true) }
   
   def authenticate
@@ -48,10 +46,5 @@ class User < ApplicationRecord
     def hash_password
       self.password_salt =  SecureRandom.base64(8) if self.password_salt == nil
       self.hashed_password = Digest::SHA1.hexdigest(self.password_salt + self.password)
-    end
-    
-    def create_user_detail
-      build_user_detail(full_name: full_name, email_id: email_id, phone_no: phone_no)
-      save
     end
 end
