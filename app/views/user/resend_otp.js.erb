@@ -1,0 +1,13 @@
+var time_holder = document.getElementById("time-holder");
+<% p @time %>
+<% if @time > 0 && @time <= 120 %>
+  <% sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
+  time_holder.innerHTML = `<%= t(:didnt_receive_the_code) %>? <%= t(:send_code_again_in) %><span id="sec-timer"><%= @time %></span> <%= t(:seconds) %>`;
+  clearInterval(x);
+  start('<%= sent_time_in_rails %>');
+<% else %>
+  console.log(11);
+  time_holder.innerHTML = `<%= link_to t(:resend_otp), resend_otp_user_index_path, remote: true %>`;
+  $(time_holder).find('a').attr("href", $(time_holder).find('a').attr("href") + "?email_id=" + $('#user_email_id').val());
+<% end %>
+$('#dummy-otp').val(<%= session[:otp]["code"] %>)
