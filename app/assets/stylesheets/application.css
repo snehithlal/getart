@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-
-.container, .container-sm, .container-md, .container-lg, .container-xl{
-  max-width: 1360px !important;
+ 
+.alert ul, .alert ul li{
+ margin: 0;
 }

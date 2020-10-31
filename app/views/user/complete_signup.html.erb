@@ -14,11 +14,11 @@
           </div>
           <div class="field">
             <%= user_detail.label :full_name, "Full Name:" %>
-            <%= user_detail.text_field :full_name, autofocus: true, autocomplete: "off", placeholder: "Enter Your Full Name" %>
+            <%= user_detail.text_field :full_name, autofocus: true, autocomplete: "off", placeholder: "Enter Your Full Name", required: true %>
           </div>
           <div class="field">
             <%= user_detail.label :phone_no, "Mobile Number:" %>
-            <%= user_detail.text_field :phone_no, autocomplete: "off", placeholder: "Enter Your Mobile Number", class: "numberField" %>
+            <%= user_detail.text_field :phone_no, autocomplete: "off", placeholder: "Enter Your Mobile Number", required: true, class: "numberField" %>
           </div>  
           <%= user_detail.hidden_field :email_id, value: @current_user.email_id %>
         <% end %>

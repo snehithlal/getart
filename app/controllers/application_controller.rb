@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   
     def current_user
       @current_user ||= User.find_by_id(session[:user_id])
+      reset_flash_message
     end
     
     def check_first_login
@@ -20,6 +21,13 @@ class ApplicationController < ActionController::Base
         back_path = request.path.split("/").select {|x| x.present?}
         session[:back_path] = url_for(controller: back_path[0], action: back_path[1]) 
         redirect_to login_user_index_path
+      end
+    end
+    
+    def reset_flash_message
+      [:blue_notice, :lightgrey_notice, :success, :danger, :warning, :info,
+        :light, :dark].each do |x|
+        flash[x] = nil
       end
     end
 end

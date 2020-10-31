@@ -39,10 +39,10 @@
             <div class="width-100 otp-field-container">
               <p class="float-left otp-label">Enter OTP</p>
               <p class="float-right otp-fields">
-                <%= text_field_tag 'otp[0]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
-                <%= text_field_tag 'otp[1]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
-                <%= text_field_tag 'otp[2]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
-                <%= text_field_tag 'otp[3]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
+                <%= text_field_tag 'otp[0]', nil, class: "otp-field", maxlength: 1, autocomplete: "off", required: true %>
+                <%= text_field_tag 'otp[1]', nil, class: "otp-field", maxlength: 1, autocomplete: "off", required: true %>
+                <%= text_field_tag 'otp[2]', nil, class: "otp-field", maxlength: 1, autocomplete: "off", required: true %>
+                <%= text_field_tag 'otp[3]', nil, class: "otp-field", maxlength: 1, autocomplete: "off", required: true %>
               </p>
             </div>
           </div>
@@ -55,7 +55,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text left-input-group-text">Set Password :</span>
               </div>
-              <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password", class: "form-control signup-password-field" %>
+              <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password", required: true, class: "form-control signup-password-field" %>
               <div class="input-group-append">
                 <span id="set-password-visibility" class="input-group-text right-input-group-text">
                   <%= image_tag "visibility.svg", class: "change-visibility make-visibile" %>
@@ -70,7 +70,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text left-input-group-text">Confirm Password :</span>
               </div>
-              <%= f.password_field :confirm_password, autocomplete: "new-password", placeholder: "Confirm Password", class: "form-control signup-password-field" %>
+              <%= f.password_field :confirm_password, autocomplete: "new-password", placeholder: "Confirm Password", required: true, class: "form-control signup-password-field" %>
               <div class="input-group-append">
                 <span id="confirm-password-visibility" class="input-group-text right-input-group-text">
                   <%= image_tag "visibility.svg", class: "change-visibility make-visibile" %>
@@ -82,7 +82,7 @@
           <%= f.hidden_field :email_id, readonly: true %>
           <%= hidden_field_tag :step, @step %>
         <% else %>
-          <%= f.email_field :email_id, autofocus: true, autocomplete: "email", placeholder: "E-mail" %>
+          <%= f.email_field :email_id, autofocus: true, autocomplete: "email", placeholder: "E-mail", required: true %>
         <% end %>
 
         <div class="field field-right">
@@ -121,7 +121,7 @@
   
   <% if session[:otp].present? %>
     window.onload = function() {
-      <% sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
+      <% p sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
       <% if @step.to_sym == :otp_send || @step.to_sym == :password_not_match %>
         var x;
         clearInterval(x);
@@ -138,7 +138,7 @@
       var sent_time = new Date(sent_time_in_rails)
       var time_diff = parseInt((new Date() - sent_time)/1000);
       var sec_time = parseInt(sec_timer.innerHTML);
-      if((sec_time == 0) && (120 - time_diff <= 0)){
+      if((sec_time <= 0) && (120 - time_diff <= 0)){
         clearInterval(x);
         time_holder.innerHTML = '<%= link_to t(:resend_otp), resend_otp_user_index_path, remote: true %>';
         $(time_holder).find('a').attr("href", $(time_holder).find('a').attr("href") + "?email_id=" + $('#user_email_id').val());

@@ -8,11 +8,11 @@
       <%= form_for(@user, url: login_user_index_path) do |f| %>
         <%= render partial: "error_messages", locals:{ user: @user} %>
         <div class="field">
-          <%= f.email_field :email_id, autofocus: true, autocomplete: "off", placeholder: "E-mail" %>
+          <%= f.email_field :email_id, autofocus: true, autocomplete: "off", placeholder: "E-mail", required: true %>
         </div>
 
         <div class="field">
-          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Enter Password" %>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Enter Password", required: true %>
         </div>
         
         <div class="field field-right">
