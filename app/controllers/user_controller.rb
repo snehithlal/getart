@@ -13,7 +13,7 @@ class UserController < ApplicationController
         redirect_to session[:back_path], fallback_location: root_path
       else
         flash[:danger] = "Wrong Credentials"
-        redirect_to :root
+        redirect_to action: :login
       end
     end
   end
