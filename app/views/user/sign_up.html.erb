@@ -13,26 +13,26 @@
         <% when :otp_send, :password_not_match %>
           <div class="field">
             <div class="width-100 show-email-field">
-              <p class="float-left">Email:</p><pre class="float-left"> </pre>
+              <p class="float-left email-label">Email:</p><pre class="float-left"> </pre>
               <p class="float-left hidden-email"><%= @user.email_id %></p>
-              <p class="float-right"><%= link_to "Change?", sign_up_user_index_path, class: "light-red" %></p>
+              <p class="float-right"><%= link_to "Change?", sign_up_user_index_path, class: "light-red change-link" %></p>
             </div>
           </div>
 
           <div class="field">
             <div style="width:100%;">
-              <p class="float-left">OTP sent to E-mail</p>
+              <p class="float-left otp-sent-label">OTP sent to E-mail</p>
               <p id="time-holder" class="otp-timer light-red float-right">
-                <%= t(:didnt_receive_the_code) %>? <%= t(:send_code_again_in) %>
+                <%#= t(:didnt_receive_the_code) %><!-- ? --> <%= t(:send_code_again_in) %>
                 <span id="sec-timer"><%= @time %></span>  <%= t(:seconds) %>
               </p>
             </div>
           </div>
           
           <div class="field">
-            <div class="width-100">
-              <p class="float-left">Enter OTP</p>
-              <p class="float-right">
+            <div class="width-100 otp-field-container">
+              <p class="float-left otp-label">Enter OTP</p>
+              <p class="float-right otp-fields">
                 <%= text_field_tag 'otp[0]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
                 <%= text_field_tag 'otp[1]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
                 <%= text_field_tag 'otp[2]', nil, class: "otp-field", maxlength: 1, autocomplete: "off" %>
@@ -41,15 +41,37 @@
             </div>
           </div>
           
-          <div class="field">
+          <div class="field set-password">
             <% if User.minimum_password_length %>
               <em>(<%= User.minimum_password_length %> characters minimum)</em><br />
             <% end %>
-            <%= f.password_field :password, autocomplete: "new-password", placeholder: "Set Password" %>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text left-input-group-text">Set Password :</span>
+              </div>
+              <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password", class: "form-control signup-password-field" %>
+              <div class="input-group-append">
+                <span id="set-password-visibility" class="input-group-text right-input-group-text">
+                  <%= image_tag "visibility.svg", class: "change-visibility make-visibile" %>
+                  <%= image_tag "visibility-off.svg", class: "change-visibility make-invisibile" %>
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div class="field">
-            <%= f.password_field :confirm_password, autocomplete: "new-password", placeholder: "Confirm Password" %>
+          <div class="field confirm-password">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text left-input-group-text">Confirm Password :</span>
+              </div>
+              <%= f.password_field :confirm_password, autocomplete: "new-password", placeholder: "Confirm Password", class: "form-control signup-password-field" %>
+              <div class="input-group-append">
+                <span id="confirm-password-visibility" class="input-group-text right-input-group-text">
+                  <%= image_tag "visibility.svg", class: "change-visibility make-visibile" %>
+                  <%= image_tag "visibility-off.svg", class: "change-visibility  make-invisibile" %>
+                </span>
+              </div>
+            </div>
           </div>
           <%= f.hidden_field :email_id, readonly: true %>
           <%= hidden_field_tag :step, @step %>
@@ -62,7 +84,7 @@
         </div>
         
         <div class="field field-center login-link-margin">
-          <%= link_to "Existing User? LOGIN", login_user_index_path, class: "light-red bold-text" %>
+          <%= link_to "Existing User? LOGIN", login_user_index_path, class: "light-red bold-text login-link" %>
         </div>
       <% end %>
     </div>
@@ -128,4 +150,17 @@
       change_time(sent_time_in_rails)
     }, 1000);
   }
+  
+  $('body').delegate('.change-visibility', 'click', function(){
+    var class_array = $(this).attr("class").split(" ");
+    var parent_id = $(this).parent().attr("id");
+    $(this).css("display", "none");
+    if(jQuery.inArray("make-visibile", class_array) !== -1){
+      $(`.${parent_id.replace("-visibility", "")} input`).attr("type", "text");
+      $(`#${parent_id} .make-invisibile`).css("display", "block");
+    }else{
+      $(`.${parent_id.replace("-visibility", "")} input`).attr("type", "password");
+      $(`#${parent_id} .make-visibile`).css("display", "block");
+    }
+  });
 </script>

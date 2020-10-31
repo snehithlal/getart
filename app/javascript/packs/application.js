@@ -49,7 +49,7 @@ $(function(){
        var value = $(this).val();
        if(intRegex.test(value)){
          $(this).next('.otp-field').focus();
-         $(this).css("border", "2px solid lightgrey");
+         $(this).css("border", "0.15000000596046448px solid #52616B");
          $('input[type="submit"]').attr("disabled", false);
        }else{
          $(this).val("");
@@ -58,11 +58,11 @@ $(function(){
    })
    
    $('#user_password').keypress(function(e){
-     $(this).css("border", "2px solid lightgrey");
+     $(this).css("border", "0.15000000596046448px solid #52616B");
    })
    
    $('#user_confirm_password').keypress(function(e){
-     $(this).css("border", "2px solid lightgrey");
+     $(this).css("border", "0.15000000596046448px solid #52616B");
    })
 })
 // Uncomment to copy all static images under ../images to the output folder and reference
