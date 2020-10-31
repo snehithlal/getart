@@ -3,11 +3,11 @@ class ApplicationController < ActionController::Base
   before_action :current_user
   before_action :check_first_login
   helper_method :current_user
+  helper_method :reset_flash_message
   private
   
     def current_user
       @current_user ||= User.find_by_id(session[:user_id])
-      reset_flash_message
     end
     
     def check_first_login
