@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :login_required, only: [:new, :create]
 
   def index
     @products = Product.all
@@ -22,7 +23,7 @@ class ProductsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:product).permit(:name, :description, {images: []})
+    params.require(:product).permit(:name, :description, :user_id, {images: []})
   end
 
 end

@@ -9,5 +9,6 @@
   <div class="form-group row">
     <%= f.file_field :images, class: "form-control-file col-sm-10", required: true, multiple: true %>
   </div>
+  <%= f.hidden_field :user_id, value: @current_user.id%>
   <%= f.submit "#{t('submit')}", class: "btn btn-lg btn-secondary" %>
 <% end %>
