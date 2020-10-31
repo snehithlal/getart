@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_one :user_detail, dependent: :destroy
+  has_many :products
+  
   attr_accessor :full_name, :password, :confirm_password, :dont_validate_password
   validates_presence_of :email_id#,:full_name, :phone_no
   validates_presence_of :password, if: Proc.new{|user| user.dont_validate_password != false}
@@ -7,7 +10,6 @@ class User < ApplicationRecord
   validates :email_id, uniqueness: { scope: :is_active,
       message: "can have only one active per time." }, if: Proc.new{|user| user.new_record?} #:phone_no
   # validates :phone_no, numericality: true, length: { minimum: 10, maximum: 10 }
-  has_one :user_detail, dependent: :destroy
   after_create :create_user_detail
   before_save :hash_password, if: Proc.new{|user| user.dont_validate_password != false}
   

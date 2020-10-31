@@ -35,5 +35,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-# database
-/config/database.yml
+.Gemfile.lock
+/public/uploads

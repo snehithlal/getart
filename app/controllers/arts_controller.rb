@@ -2,7 +2,7 @@ class ArtsController < ApplicationController
   before_action :login_required, except: [:index]
 
   def index
-    @arts = "Hiii"
+    @categories = Category.all.includes(:subcategories)
   end
-    
+  
 end

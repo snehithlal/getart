@@ -16,7 +16,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand get-art col-7" href="#">Get Art</a>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="collapse navbar-collapse col-5" id="navbarCollapse">
           <form class="form-inline mt-2 mt-md-0">
             <div class="search-icon"><%= fa_icon('search') %></div>
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
@@ -39,8 +39,10 @@
         </div>
       </nav>
     </div>
-    <div class="container main-container">
+    <div class="main-container">
      <%= yield %>
+    </div>
+
       <footer class="footer">
         <div class="quote">
           <blockquote class="blockquote mb-0">
@@ -79,6 +81,5 @@
           </div>
         </div>
       </footer>
-    </div>
   </body>
 </html>

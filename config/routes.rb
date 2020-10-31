@@ -14,5 +14,7 @@ Rails.application.routes.draw do
       patch :forgot_password
     end
   end
+
+  resources :products
   root 'arts#index'
 end

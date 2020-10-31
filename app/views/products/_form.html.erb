@@ -1,0 +1,13 @@
+<%= form_for(product, :html => { :multipart => true }) do |f|%>
+  <%= flash_messages %>
+  <div class="form-group row">
+    <%= f.text_field :name, autofocus: true, placeholder: "#{t('name_your_work')}", class: "form-control col-sm-10",required: true %>
+  </div>
+  <div class="form-group row">
+    <%= f.text_area :description, autofocus: true, placeholder: "#{t('tell_us')}", class: "form-control col-sm-10", required: true, rows: '5' %>
+  </div>
+  <div class="form-group row">
+    <%= f.file_field :images, class: "form-control-file col-sm-10", required: true, multiple: true %>
+  </div>
+  <%= f.submit "#{t('submit')}", class: "btn btn-lg btn-secondary" %>
+<% end %>
