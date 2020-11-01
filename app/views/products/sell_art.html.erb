@@ -3,7 +3,11 @@
     <p>SELL ART ON GET ART</p>
     <p>Get best value for your creations</p>
   </div>
-  <%= button_to "REGISTER NOW", register_as_seller_user_index_path, class: "register-button" %>
+  <% if @current_user.is_seller %>
+    <%= button_to "SELL NOW", new_product_path, method: :get, class: "register-button" %>
+  <% else %>
+    <%= button_to "REGISTER NOW", register_as_seller_user_index_path, class: "register-button" %>
+  <% end %>
 </div>
 
 <div class="get-art-details">

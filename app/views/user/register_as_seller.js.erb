@@ -1,4 +1,8 @@
 
 $('#seller-registration').html(`
-  <%= render  "product"%>
+  <% if @error.present? %>
+    <%= render  "registration"%>
+  <% else %>
+    <%= render  "seller_created_successfully"%>
+  <% end%>
 `);

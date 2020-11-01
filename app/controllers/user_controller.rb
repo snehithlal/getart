@@ -156,20 +156,21 @@ class UserController < ApplicationController
             if @user_detail.update(user_params[:user_detail])
               @current_user.update(is_seller: true, dont_validate_password: false)
               flash[:success] = t(:registered_as_seller)
-              redirect_to :root
             end
           end
         else
+          @error = true
           flash[:danger] = t(:wrong_credentials)
         end
       end
     else
       flash[:danger] = t(:already_registered_as_seller)
-      redirect_to :root
+      redirect_to :new_product
     end
   end
   
   private
+
     def user_params
       params.require(:user).permit(:password, :confirm_password, :email_id, :phone_no, 
         user_detail: [:full_name, :phone_no])
