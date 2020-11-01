@@ -10,8 +10,7 @@ module Getart
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    
-    config.hosts << /[a-z0-9]+\.ngrok\.io/
+    config.hosts << /[a-z0-9]+(\.([a-z0-9])+)*/
     
     #sidekiq configuration
     #config.active_job.queue_adapter = :sidekiq
