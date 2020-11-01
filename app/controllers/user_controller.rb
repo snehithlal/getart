@@ -12,7 +12,7 @@ class UserController < ApplicationController
         user.update(sign_in_count: user.sign_in_count.to_i + 1, dont_validate_password: false)
         session[:user_id] = user.id
         reset_flash_message
-        redirect_to session[:back_path], fallback_location: root_path
+        redirect_to (session[:back_path].present? ? session[:back_path] : root_path)
       else
         reset_flash_message
         flash[:danger] = t(:wrong_credentials)
