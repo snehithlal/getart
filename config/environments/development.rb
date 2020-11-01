@@ -53,19 +53,18 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
   
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.delivery_method = :smtp
 
   # SMTP settings for gmail
-  # config.action_mailer.smtp_settings = {
-  #   address: AppConfig["mail_config"]["address"],
-  #   port: AppConfig["mail_config"]["port"],
-  #   domain: AppConfig["mail_config"]["domain"],
-  #   user_name: AppConfig["mail_config"]["user_name"],
-  #   password: AppConfig["mail_config"]["password"],
-  #   authentication: AppConfig["mail_config"]["authentication"],
-  #   enable_starttls_auto: AppConfig["mail_config"]["enable_starttls_auto"]
-  # }
+  config.action_mailer.smtp_settings = {
+    address: Rails.application.credentials.aws[:email_configuratons][:address],
+    port: Rails.application.credentials.aws[:email_configuratons][:port],
+    domain: Rails.application.credentials.aws[:email_configuratons][:domain],
+    user_name: Rails.application.credentials.aws[:email_configuratons][:username],
+    password: Rails.application.credentials.aws[:email_configuratons][:password],
+    authentication: Rails.application.credentials.aws[:email_configuratons][:authentication],
+    enable_starttls_auto: Rails.application.credentials.aws[:email_configuratons][:enable_starttls_auto]
+  }
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true

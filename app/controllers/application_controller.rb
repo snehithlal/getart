@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :login_required
   before_action :current_user
   before_action :check_first_login
   helper_method :current_user
