@@ -7,19 +7,18 @@
       <p class="title"> REGISTER TO SELL ART ON GET ART </p>
       <p class="create-desc"> How to sell Art on Get Art </p>
       <%= form_for(@current_user, url: register_as_seller_user_index_path) do |f| %>
-        <%= render partial: "error_messages", locals:{ user: @current_user} %>
-        <%#= flash_messages %>
+        <%= render partial: "error_messages", locals:{ user: @user_detail} %>
         <%= f.hidden_field :email_id %>
         <div class="form-group row">
           <%= f.label 'Email', class: "col-sm-3 col-form-label" %><br>
           <%= text_field_tag :email_id, @current_user.email_id, 
               class: "form-control col-sm-9", required: true, disabled: true %>
         </div>
-        <%= f.fields_for :user_detail, @current_user.user_detail do |ff|%>
+        <%= f.fields_for :user_detail, @user_detail do |ff|%>
           <div class="form-group row">
             <%= ff.label 'Full Name', class: "col-sm-3 col-form-label" %><br>
             <%= ff.text_field :full_name, class: "form-control col-sm-9",
-                required: true %>
+                required: false %>
           </div>
           
           <div class="form-group row">

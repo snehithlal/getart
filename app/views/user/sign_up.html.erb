@@ -120,7 +120,7 @@
   
   <% if session[:otp].present? %>
     window.onload = function() {
-      <% p sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
+      <% sent_time_in_rails = (session[:otp]["sent_time"].present? ? session[:otp]["sent_time"].to_time : Time.now.to_time).to_s.slice(0, 19) %>  
       <% if @step.to_sym == :otp_send || @step.to_sym == :password_not_match %>
         var x;
         clearInterval(x);

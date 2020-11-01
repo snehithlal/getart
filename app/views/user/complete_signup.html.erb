@@ -6,7 +6,7 @@
       <h2 class="dark-red">COMPLETE SIGN UP</h2>
       <p>Sign Up to shop and explore Get Art</p>
       <%= form_for(@current_user, url: complete_signup_user_index_path) do |f| %>
-        <%= render partial: "error_messages", locals:{ user:  @current_user} %>
+        <%= render partial: "error_messages", locals:{ user:  @user_detail} %>
         <%= f.fields_for :user_detail, @current_user.build_user_detail do |user_detail|%>
           <div class="field">
             <%= user_detail.label :email_id, "E-mail:" %>
@@ -20,9 +20,8 @@
             <%= user_detail.label :phone_no, "Mobile Number:" %>
             <%= user_detail.text_field :phone_no, autocomplete: "off", placeholder: "Enter Your Mobile Number", required: true, class: "numberField" %>
           </div>  
-          <%= user_detail.hidden_field :email_id, value: @current_user.email_id %>
         <% end %>
-        
+        <%= f.hidden_field :email_id %>
         <div class="field complete-signup-submit-field field-right">
           <%= f.submit "SAVE" %>
         </div>

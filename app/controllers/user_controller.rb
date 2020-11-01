@@ -79,11 +79,11 @@ class UserController < ApplicationController
   
   def complete_signup
     reset_flash_message
-    unless @current_user.user_detail   
-      if request.patch? 
-        email_check = user_params[:user_detail_attributes][:email_id] == @current_user.email_id
-        if email_check && @current_user.update(user_params.merge({
-          dont_validate_password: false}))
+    unless @current_user.user_detail
+      if request.patch?
+        @user_detail = @current_user.build_user_detail(user_params[:user_detail])
+        email_check = user_params[:email_id] == @current_user.email_id
+        if email_check && @user_detail.save
           flash[:success] = t(:signup_completed)
           redirect_to :root
         end
@@ -148,13 +148,14 @@ class UserController < ApplicationController
   def register_as_seller
     reset_flash_message
     unless @current_user.is_seller
+      @user_detail = @current_user.user_detail
       if request.patch?
-        user = User.new(user_params.except(:user_detail_attributes))
+        user = User.new(user_params.except(:user_detail))
         if user.authenticate
           if user.email_id == @current_user.email_id
-            if @current_user.update(user_params.except(:password).merge({is_seller: true, 
-              dont_validate_password: false}))
-              flash[:success] = t(:success_message) #change success
+            if @user_detail.update(user_params[:user_detail])
+              @current_user.update(is_seller: true, dont_validate_password: false)
+              flash[:success] = t(:registered_as_seller)
               redirect_to :root
             end
           end
@@ -170,10 +171,8 @@ class UserController < ApplicationController
   
   private
     def user_params
-      params.require(:user).permit(:password, :confirm_password,
-        :email_id, :is_seller, :phone_no, 
-        user_detail: [:full_name, :phone_no, :email_id],
-        user_detail_attributes: [:id, :full_name, :email_id, :phone_no])
+      params.require(:user).permit(:password, :confirm_password, :email_id, :phone_no, 
+        user_detail: [:full_name, :phone_no])
     end
     
     def reset_session
