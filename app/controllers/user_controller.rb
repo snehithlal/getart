@@ -132,12 +132,21 @@ class UserController < ApplicationController
   end
 
   def register_as_seller
-
+    if request.patch?
+      @user = User.new(user_params)
+      if @user.authenticate
+       @user.update(user_params)
+      else
+        flash[:danger] = @user.errors.full_messages
+      end
+    end
   end
   
   private
     def user_params
-      params.require(:user).permit(:password, :confirm_password, :email_id, :phone_no, :user_detail => [:full_name, :phone_no, :email_id])
+      params.require(:user).permit(:id, :password, :confirm_password, :email_id, :is_seller, :phone_no, 
+        :user_detail => [:full_name, :phone_no, :email_id],
+        user_detail_attributes: [:id, :full_name, :email_id])
     end
     
     def reset_session
