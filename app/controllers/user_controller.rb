@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_action :login_required, except: [:login, :sign_up, :resend_otp, :forgot_password]
+  skip_before_action :login_required, only: [:login, :sign_up, :resend_otp, :forgot_password]
   before_action :redirect_to_root, only: [:login, :sign_up, :resend_otp, :forgot_password]
   skip_before_action :check_first_login, only: [:complete_signup]
   
@@ -11,15 +11,18 @@ class UserController < ApplicationController
         user = User.active.where("email_id = ?", @user.email_id).first
         user.update(sign_in_count: user.sign_in_count.to_i + 1)
         session[:user_id] = user.id
+        reset_flash_message
         redirect_to session[:back_path], fallback_location: root_path
       else
-        flash[:danger] = "Wrong Credentials"
+        reset_flash_message
+        flash[:danger] = t(:wrong_credentials)
         redirect_to action: :login
       end
     end
   end
   
   def sign_up
+    reset_flash_message
     @user = User.new
     if request.post?
       @user = User.new(user_params) 
@@ -42,13 +45,13 @@ class UserController < ApplicationController
             end
           else
             @time = (120 - (Time.now.to_time - session[:otp]["sent_time"].to_time)).to_i
-            flash[:danger] = "Wrong OTP"
+            flash[:danger] = t(:wrong_otp)
             @step = :otp_send
             render action: :sign_up
           end
         end
       else
-        flash[:danger] = "Account exist. <br>#{view_context.link_to 'Click here to login', login_user_index_path} or #{view_context.link_to 'Click here to reset password', forgot_password_user_index_path}"
+        flash[:danger] = "#{t(:account_exist)}. <br>#{view_context.link_to t(:click_here_to_login), login_user_index_path} or #{view_context.link_to t(:click_hereh_to_reset_password), forgot_password_user_index_path}"
         redirect_to action: :sign_up
       end
     else
@@ -75,12 +78,17 @@ class UserController < ApplicationController
   end
   
   def complete_signup
-    @user_detail = @current_user.build_user_detail()
-    if request.patch?
-      @user_detail = @current_user.build_user_detail(user_params[:user_detail])
-      if @user_detail.save
-        redirect_to :root
+    reset_flash_message
+    unless @current_user.user_detail
+      @user_detail = @current_user.build_user_detail()
+      if request.patch?
+        @user_detail = @current_user.build_user_detail(user_params[:user_detail])
+        if @user_detail.save
+          redirect_to :root
+        end
       end
+    else
+      redirect_to :root
     end
   end
   
@@ -96,8 +104,10 @@ class UserController < ApplicationController
       if @user.present?
         @user.send_password_reset_token_by_mail
         @step = :mail_sent
-        flash[:success] = "Sent by mail"
+        reset_flash_message
+        flash[:success] = t(:sent_by_mail)
       else
+        reset_flash_message
         flash[:danger] = t(:user_not_found)
         redirect_to action: :forgot_password
       end
@@ -105,7 +115,8 @@ class UserController < ApplicationController
       @user = User.find_by_email_id(user_params[:email_id])
       if @user.update(user_params)
         reset_password_token
-        flash[:danger] = "Password changed"
+        reset_flash_message
+        flash[:danger] = t(:password_changed)
         redirect_to :root
       else
         @step = :password_not_match
@@ -117,6 +128,7 @@ class UserController < ApplicationController
         if @user.present?
           @step = :token_authenticated
         else
+          reset_flash_message
           flash[:danger] = t(:user_not_found)
           redirect_to action: :forgot_password
         end
@@ -125,6 +137,7 @@ class UserController < ApplicationController
   end
   
   def dashboard
+    reset_flash_message
     @user_detail = @current_user.user_detail
   end
 
