@@ -6,9 +6,8 @@
     <div class="col-8">
       <p class="title"> REGISTER TO SELL ART ON GET ART </p>
       <p class="create-desc"> How to sell Art on Get Art </p>
-      <%= form_for(@current_user, url: register_as_seller_user_index_path) do |f| %>
-        <%= render partial: "error_messages", locals:{ user: @current_user} %>
-        <%#= flash_messages %>
+      <%= form_for(@current_user, url: register_as_seller_user_index_path, html: {remote: true}) do |f| %>
+        <%= flash_messages %>
         <%= f.hidden_field :email_id %>
         <div class="form-group row">
           <%= f.label 'Email', class: "col-sm-3 col-form-label" %><br>
