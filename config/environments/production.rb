@@ -61,7 +61,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "getart_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   # 
   # SMTP settings for gmail
@@ -69,7 +69,7 @@ Rails.application.configure do
     address: Rails.application.credentials.aws[:email_configuratons][:address],
     port: Rails.application.credentials.aws[:email_configuratons][:port],
     domain: Rails.application.credentials.aws[:email_configuratons][:domain],
-    user_name: Rails.application.credentials.aws[:email_configuratons][:user_name],
+    user_name: Rails.application.credentials.aws[:email_configuratons][:username],
     password: Rails.application.credentials.aws[:email_configuratons][:password],
     authentication: Rails.application.credentials.aws[:email_configuratons][:authentication],
     enable_starttls_auto: Rails.application.credentials.aws[:email_configuratons][:enable_starttls_auto]
