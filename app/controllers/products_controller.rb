@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    reset_flash_message
     @product = Product.new
     @categories = Category.all.includes(:subcategories)
   end

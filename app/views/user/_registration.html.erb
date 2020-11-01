@@ -14,11 +14,11 @@
           <%= text_field_tag :email_id, @current_user.email_id, 
               class: "form-control col-sm-9", required: true, disabled: true %>
         </div>
-        <%= f.fields_for :user_detail, @current_user.user_detail do |ff|%>
+        <%= f.fields_for :user_detail, @user_detail do |ff|%>
           <div class="form-group row">
             <%= ff.label 'Full Name', class: "col-sm-3 col-form-label" %><br>
             <%= ff.text_field :full_name, class: "form-control col-sm-9",
-                required: true %>
+                required: false %>
           </div>
           
           <div class="form-group row">

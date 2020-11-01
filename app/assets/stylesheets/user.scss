@@ -398,3 +398,40 @@
 .register-sell-art {
   background: #F0F5F9;
 }
+
+.seller-registered {
+  background: #F0F5F9;
+  height: 530px;
+  width: 933px;
+}
+
+.congratulate {
+  font-family: 'Lily Script One', cursive;
+  font-size: 50px;
+  margin: 30px auto;
+}
+
+.art-sell {
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.sell-art-button {
+  margin: 0 auto;
+  background: #52616B57;
+  width: 153px;
+  height: 36px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.sell-art-button-center {
+  width: 15%;
+  margin: 25px auto !important;
+}
+
+.register-footer {
+  margin: 100px 15px;
+  padding: 0px 20px;
+  text-align: center;
+}

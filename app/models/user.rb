@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_one :user_detail, dependent: :destroy
   has_many :products
+  delegate :full_name, :phone_no, to: :user_detail, allow_nil: true
   
   attr_accessor :password, :confirm_password, :dont_validate_password
   validates_presence_of :email_id
@@ -12,8 +13,7 @@ class User < ApplicationRecord
   before_save :hash_password, if: Proc.new{|user| user.dont_validate_password != false}
    
   scope :active, -> { where(is_active: true) }
-  accepts_nested_attributes_for :user_detail, update_only: true
-  delegate :full_name, :phone_no, to: :user_detail, allow_nil: true
+  
   
   def authenticate
     user = User.active.where("email_id = ?", self.email_id).first
