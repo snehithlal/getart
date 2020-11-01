@@ -9,7 +9,7 @@ class UserController < ApplicationController
       @user = User.new(user_params)
       if @user.authenticate
         user = User.active.where("email_id = ?", @user.email_id).first
-        user.update(sign_in_count: user.sign_in_count.to_i + 1)
+        user.update(sign_in_count: user.sign_in_count.to_i + 1, dont_validate_password: false)
         session[:user_id] = user.id
         reset_flash_message
         redirect_to session[:back_path], fallback_location: root_path
@@ -79,11 +79,12 @@ class UserController < ApplicationController
   
   def complete_signup
     reset_flash_message
-    unless @current_user.user_detail
-      @user_detail = @current_user.build_user_detail()
-      if request.patch?
-        @user_detail = @current_user.build_user_detail(user_params[:user_detail])
-        if @user_detail.save
+    unless @current_user.user_detail   
+      if request.patch? 
+        email_check = user_params[:user_detail_attributes][:email_id] == @current_user.email_id
+        if email_check && @current_user.update(user_params.merge({
+          dont_validate_password: false}))
+          flash[:success] = t(:signup_completed)
           redirect_to :root
         end
       end
@@ -145,21 +146,34 @@ class UserController < ApplicationController
   end
 
   def register_as_seller
-    if request.patch?
-      @user = User.new(user_params)
-      if @user.authenticate
-       @user.update(user_params)
-      else
-        flash[:danger] = @user.errors.full_messages
+    reset_flash_message
+    unless @current_user.is_seller
+      if request.patch?
+        user = User.new(user_params.except(:user_detail_attributes))
+        if user.authenticate
+          if user.email_id == @current_user.email_id
+            if @current_user.update(user_params.except(:password).merge({is_seller: true, 
+              dont_validate_password: false}))
+              flash[:success] = t(:success_message) #change success
+              redirect_to :root
+            end
+          end
+        else
+          flash[:danger] = t(:wrong_credentials)
+        end
       end
+    else
+      flash[:danger] = t(:already_registered_as_seller)
+      redirect_to :root
     end
   end
   
   private
     def user_params
-      params.require(:user).permit(:id, :password, :confirm_password, :email_id, :is_seller, :phone_no, 
-        :user_detail => [:full_name, :phone_no, :email_id],
-        user_detail_attributes: [:id, :full_name, :email_id])
+      params.require(:user).permit(:password, :confirm_password,
+        :email_id, :is_seller, :phone_no, 
+        user_detail: [:full_name, :phone_no, :email_id],
+        user_detail_attributes: [:id, :full_name, :email_id, :phone_no])
     end
     
     def reset_session

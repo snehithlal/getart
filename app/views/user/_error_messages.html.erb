@@ -1,4 +1,4 @@
-<% if user.errors.any? %>
+<% if user && user.errors.any? %>
   <div class="alert alert-danger" role="alert">
     <ul>
       <% user.errors.full_messages.each do |message| %>
@@ -7,43 +7,4 @@
     </ul>
   </div>
 <% end %>
-<% if flash[:blue_notice].present? %>
-  <div class="alert alert-primary" role="alert">
-    <%= flash[:blue_notice].html_safe %>
-  </div>
-<% end %>
-<% if flash[:lightgrey_notice].present? %>
-  <div class="alert alert-secondary" role="alert">
-    <%= flash[:lightgrey_notice].html_safe %>
-  </div>
-<% end %>
-<% if flash[:success].present? %>
-  <div class="alert alert-success" role="alert">
-    <%= flash[:success].html_safe %>
-  </div>
-<% end %>
-<% if flash[:danger].present? %>
-  <div class="alert alert-danger" role="alert">
-    <%= flash[:danger].html_safe %>
-  </div>
-<% end %>
-<% if flash[:warning].present? %>
-  <div class="alert alert-warning" role="alert">
-    <%= flash[:warning].html_safe %>
-  </div>
-<% end %>
-<% if flash[:info].present? %>
-  <div class="alert alert-info" role="alert">
-    <%= flash[:info].html_safe %>
-  </div>
-<% end %>
-<% if flash[:light].present? %>
-  <div class="alert alert-light" role="alert">
-    <%= flash[:light].html_safe %>
-  </div>
-<% end %>
-<% if flash[:dark].present? %>
-  <div class="alert alert-dark" role="alert">
-    <%= flash[:dark].html_safe %>
-  </div>
-<% end %>
+<%= render partial: "layouts/flash_messages" %>

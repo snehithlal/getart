@@ -6,39 +6,44 @@
     <div class="col-8">
       <p class="title"> REGISTER TO SELL ART ON GET ART </p>
       <p class="create-desc"> How to sell Art on Get Art </p>
-<%= form_for(@current_user, url: register_as_seller_user_index_path) do |f| %>
-  <%= flash_messages %>
-    <%= f.hidden_field :id %>
-    <%= f.hidden_field :email_id %>
-  <div class="form-group row">
-    <%= f.label 'Email' ,class: "col-sm-3 col-form-label" %><br>
-    <%= f.text_field :email_id, class: "form-control col-sm-9",required: true,  disabled: true %>
-  </div>
-  <%= f.fields_for :user_detail, @current_user.user_detail do |ff|%>
-    <div class="form-group row">
-      <%= ff.label 'Full Name' ,class: "col-sm-3 col-form-label" %><br>
-      <%= ff.text_field :full_name, class: "form-control col-sm-9",required: true %>
+      <%= form_for(@current_user, url: register_as_seller_user_index_path) do |f| %>
+        <%= render partial: "error_messages", locals:{ user: @current_user} %>
+        <%#= flash_messages %>
+        <%= f.hidden_field :email_id %>
+        <div class="form-group row">
+          <%= f.label 'Email', class: "col-sm-3 col-form-label" %><br>
+          <%= text_field_tag :email_id, @current_user.email_id, 
+              class: "form-control col-sm-9", required: true, disabled: true %>
+        </div>
+        <%= f.fields_for :user_detail, @current_user.user_detail do |ff|%>
+          <div class="form-group row">
+            <%= ff.label 'Full Name', class: "col-sm-3 col-form-label" %><br>
+            <%= ff.text_field :full_name, class: "form-control col-sm-9",
+                required: true %>
+          </div>
+          
+          <div class="form-group row">
+            <%= ff.label 'Phone Number' ,class: "col-sm-3 col-form-label" %><br>
+            <%= ff.text_field :phone_no, class: "form-control col-sm-9", 
+                required: true %>
+          </div>
+        <% end %>
+        
+        <div class="form-group row">
+          <%= f.label 'Current Password', class: "col-sm-3 col-form-label" %><br>
+          <%= f.password_field :password, autocomplete: "current-password",
+              placeholder: "Enter Password", required: true, 
+              class: "form-control col-sm-9" %>
+        </div>
+        <div class="row">
+          <div class="col-10">
+            <p> Confirm Get Art credential to register </p> 
+          </div>
+          <div class="col-2">
+            <%= f.submit "Confirm", class: "btn btn-lg btn-secondary" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  <div class="form-group row">
-    <%= f.label 'Phone Number' ,class: "col-sm-3 col-form-label" %><br>
-    <%= f.text_field :phone_no, class: "form-control col-sm-9",required: true %>
   </div>
-  <div class="form-group row">
-    <%= f.label 'Current Password' ,class: "col-sm-3 col-form-label" %><br>
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "Enter Password", required: true,class: "form-control col-sm-9" %>
-  </div>
-  <%= f.hidden_field :is_seller, value: true %>
-  <div class="row">
-    <div class="col-10">
-      <p> Confirm Get Art credentiol to register </p> 
-    </div>
-    <div class="col-2">
-      <%= f.submit "Confirm", class: "btn btn-lg btn-secondary" %>
-    </div>
-  </div>
-<% end %>
-
-
-    </div>
 </div>
