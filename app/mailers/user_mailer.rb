@@ -1,4 +1,6 @@
 class UserMailer < ApplicationMailer
+  default from: 'productsmf@gmail.com'
+  
   def send_otp
     @user = params[:user]
     @otp = params[:otp]
