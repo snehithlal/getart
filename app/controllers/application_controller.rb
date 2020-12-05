@@ -4,11 +4,17 @@ class ApplicationController < ActionController::Base
   before_action :current_user
   before_action :check_first_login
   helper_method :current_user
+  helper_method :current_user_detail
   helper_method :reset_flash_message
   private
   
     def current_user
       @current_user ||= User.find_by_id(session[:user_id])
+      current_user_detail if @current_user
+    end
+    
+    def current_user_detail
+      @current_user_detail ||= @current_user.user_detail
     end
     
     def check_first_login

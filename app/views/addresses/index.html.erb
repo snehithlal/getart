@@ -1,0 +1,46 @@
+<div class="row row-override">
+  <div class="col-12">
+    <div class="row row-override">
+      <div class="col-12">
+        <% breadcrumb :addresses %>
+      </div>
+    </div>
+    <div class="row row-override address-card">
+      <div class="col-12">
+        <div class="row row-override address-card-header">
+          <% if @recent_used_address %>
+            <div class="col-3">Recently Used</div>
+          <% end %>
+          <% 
+             colspan = @recent_used_address ? 9 : 12 
+             header = @recent_used_address ? "Other" : ""
+          %>
+          <div class="col-<%= colspan %>"><%= header %> Saved Addresses</div>
+        </div>
+        <div class="row row-override address-card-no-margin">
+          <% if @recent_used_address %>
+            <div class="col-3">
+              Recently Used
+            </div>
+          <% end %>
+          <div class="col-<%= colspan %>">
+            <div class="row row-override address-card-no-margin">
+              <% @addresses.each do |address| %>
+                <div class="col-4">
+                  <%= address.full_name %><br>
+                  <%= address.address[:flat_no] %><br>
+                  <%= address.address[:localtiy] %><br>
+                  <%= address.address[:area] %><br>
+                  Near <%= address.address[:landmark] %><br>
+                  <%= address.address[:town] %> - <%= address.address[:pincode] %><br>
+                  India<br>
+                  <%= address.mobile %><br>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

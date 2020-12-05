@@ -1,7 +1,6 @@
 class CreateProducts < ActiveRecord::Migration[6.0]
   def change
     create_table :products do |t|
-
       t.string :name
       t.text :description
       t.references :user
@@ -9,9 +8,9 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.references :medium
       t.references :material
       t.references :art_era
-      t.integer :status, :default =>  0
-
-
+      t.integer :status, default: 0
+      t.string :slug
+      t.boolean :is_deleted, defaut: false
       t.timestamps
     end
   end

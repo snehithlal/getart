@@ -37,6 +37,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.boolean :is_admin, default: false
       t.boolean :is_seller, default: false
       t.boolean :is_active, default: true
+      t.boolean :is_deleted, defaut: false
 
       t.timestamps
     end

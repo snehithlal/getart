@@ -1,0 +1,81 @@
+<div class="row row-override">
+  <div class="col-12">
+    <div class="row row-override">
+      <div class="col-12">
+        <% breadcrumb :orders %>
+      </div>
+    </div>
+    <div class="row row-override">
+      <div class="col-12">
+        <div class="row row-override">
+          <div class="col-3">Total orders <%= @order_count %></div>
+          <div class="col-2">Recent Orders</div>
+          <div class="col-2">
+            <% if params[:type] == "returns" %>
+              <%= link_to "Active & Completed Orders", orders_path %>
+            <% else %>
+              <%= link_to "Returns", orders_path(type: "returns") %>
+            <% end %>
+          </div>
+          <div class="col-2">
+            <% if params[:type] == "cancelled" %>
+              <%= link_to "Active & Completed Orders", orders_path %>
+            <% else %>
+              <%= link_to "Cancelled", orders_path(type: "cancelled") %>
+            <% end %>
+          </div>
+          <div class="col-3">
+            <%= text_field_tag :order_search, nil, placeholder: "Search order" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="orders-container" class="row row-override">
+      <div class="col-12">
+        <% @order_products.each do |order, order_products| %>
+          <% order_products.each do |order_product| %>
+            <div class="row row-override order-card">
+              <div class="col-12">
+                <div class="row row-override order-card-header">
+                  <div class="col-12">
+                    <div class="row row-override">
+                      <div class="col-3">Product</div>
+                      <div class="col-2">Order Status</div>
+                      <div class="col-2">Total Price</div>
+                      <div class="col-2">Shipped To</div>
+                      <div class="col-2">Order ID</div>
+                      <div class="col-1">Invoice</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row row-override">
+                  <div class="col-12">
+                    <div class="row row-override">
+                      <div class="col-3">
+                        <% product = order_product.product %>
+                        <%= order_product.product.name %><br>
+                        <%= link_to "Buy Again", buy_again_product_path(id: product.slug, order_id: order.slug) %>
+                      </div>
+                      <div class="col-2">
+                        <%= order.slug %><br>
+                        <%= link_to "Cancel", cancel_order_path(id: order.slug, product_id: product.slug) %><br>
+                      </div>
+                      <div class="col-2"><%= order.slug %></div>
+                      <div class="col-2"><%= order.slug %></div>
+                      <div class="col-2"><%= order.slug %></div>
+                      <div class="col-1">
+                        <%= link_to "View", view_invoice_order_path(id: order.slug, product_id: product.slug) %><br>
+                        <%= link_to "Download", download_invoice_order_path(id: order.slug, product_id: product.slug) %><br>
+                        <%= link_to "Help", help_path(id: order.slug, product_id: product.slug) %><br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,55 @@ Rails.application.routes.draw do
     collection do
       get :sell_art
     end
+    
+    member do
+      get :buy_again
+    end
   end
+  
+  resources :orders do
+    collection do
+    end
+    
+    member do
+      get :cancel
+      get :view_invoice
+      get :download_invoice
+    end
+  end
+  
+  resources :addresses do
+    collection do
+    end
+    
+    member do
+      get :set_as_default
+    end
+  end
+  
+  resources :coupons do
+    collection do
+    end
+    
+    member do
+    end
+  end
+  
+  resources :payments do
+    collection do
+    end
+    
+    member do
+    end
+  end
+  
+  resources :help do
+    collection do
+    end
+    
+    member do
+    end
+  end
+  
   root 'arts#index'
 end

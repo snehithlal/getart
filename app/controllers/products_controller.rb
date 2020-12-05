@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :login_required, except: [:index]
+  before_action :login_required, except: [:index] #remove if not needed
 
   def index
     @products = Product.all
@@ -22,6 +22,10 @@ class ProductsController < ApplicationController
   end
 
   def sell_art
+  end
+  
+  def buy_again
+    head :ok
   end
   
   private

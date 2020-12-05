@@ -165,5 +165,5 @@ CATEGORIES = [
 ]
 
 CATEGORIES.each do |category|
-    Category.create(category)
+  Category.create(category)
 end

@@ -1,0 +1,16 @@
+// Place all the styles related to the Addresses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.address-card{
+  margin: 3% auto;
+  background: lightgrey;
+}
+
+.address-card-no-margin{
+  background: lightgrey;
+}
+
+.address-card-header{
+  border-bottom: 1px solid grey;
+}

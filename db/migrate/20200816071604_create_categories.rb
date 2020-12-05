@@ -3,7 +3,7 @@ class CreateCategories < ActiveRecord::Migration[6.0]
     create_table :categories do |t|
       t.string :name
       t.text :description
-
+      t.boolean :is_deleted, defaut: false
       t.timestamps
     end
   end

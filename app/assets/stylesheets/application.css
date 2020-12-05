@@ -17,3 +17,8 @@
 .alert ul, .alert ul li{
   margin: 0;
 }
+
+.row-override{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
