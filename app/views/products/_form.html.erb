@@ -6,9 +6,38 @@
   <div class="form-group row">
     <%= f.text_area :description, autofocus: true, placeholder: "#{t('tell_us')}", class: "form-control col-sm-10", required: true, rows: '5' %>
   </div>
-  <div class="form-group row">
-    <%= f.file_field :images, class: "form-control-file col-sm-10", required: true, multiple: true %>
+
+  <%= f.hidden_field :user_id, value: @current_user.id %>
+
+  <div id="file-list" class="mb-2 flex">
+    <% product.images.each do |image| %>
+      <div class="position-relative mr-3 text-center file-preview" style="width: min-content;">
+        <div class="img-thumbnail">
+          <%= image_tag(image.thumb.url || 'https://icons.iconarchive.com/icons/zhoolego/material/512/Filetype-Docs-icon.png', height: 100) %>
+          <button style="top: 5px; right: 5px;" class="btn btn-xs btn-danger position-absolute" onclick="$(this).closest('.file-preview').remove()">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <%= f.hidden_field :images, multiple: true, value: image.cache_name || image.identifier %>
+      </div>
+    <% end %>
   </div>
-  <%= f.hidden_field :user_id, value: @current_user.id%>
+
+  <label for="upload_input" class="btn btn-lg btn-secondary">Choose File To Upload</label>
+  <%= f.file_field :images, id: 'upload_input', class: 'd-none', accept: 'image/*', multiple: true, onchange: 'window.breakIntoSeparateFiles(this, "#file-list", "#file-preview")' %>
+
+  <template id="file-preview">
+    <div class="position-relative mr-3 text-center file-preview" style="width: min-content;">
+      <div class="img-thumbnail">
+        <%= image_tag('', height: 100) %>
+        <button style="top: 5px; right: 5px;" class="btn btn-xs btn-danger position-absolute" onclick="$(this).closest('.file-preview').remove()">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <%= f.file_field :images, class: 'd-none', multiple: true %>
+    </div>
+  </template>
   <%= f.submit "#{t('submit')}", class: "btn btn-lg btn-secondary" %>
 <% end %>

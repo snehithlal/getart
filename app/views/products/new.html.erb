@@ -1,5 +1,19 @@
-<div class="product-creation">
-  <h3 class="title"> SUBMIT YOUR ART WORK </h3>
-  <p class="create-desc"> Unique subjects have more chance for approval and selling </p>
-  <%= render "form", product: @product, categories: @categories %>
+<%= javascript_pack_tag 'products_js' %>
+
+<div class="product-operation">
+  <div class="product-header">
+    <div class="product-header-sm">MY PORTFOLIO</div>
+    <div class="product-header-sm">SELL ART</div>
+  </div>
+  <div class="sell-options">
+    <div class="product-header-sm">New</div>
+    <div class="product-header-sm">Ready to Sale</div>
+    <div class="product-header-sm">In Review</div>
+    <div class="product-header-sm">Not Accepted</div>
+  </div>
+  <div class="product-creation">
+    <h3 class="title"> SUBMIT YOUR ART WORK </h3>
+    <p class="create-desc"> Unique subjects have more chance for approval and selling </p>
+    <%= render "form", product: @product, categories: @categories %>
+  </div>
 </div>

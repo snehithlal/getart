@@ -25,5 +25,10 @@ Rails.application.routes.draw do
       get :sell_art
     end
   end
+
+  constraints subdomain: 'admin' do
+    get '/', to: 'arts#index'
+  end
+
   root 'arts#index'
 end

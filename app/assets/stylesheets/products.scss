@@ -5,7 +5,7 @@
 .product-creation {
   background:#dbe4ea;
   width: 75%;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 20px 30px;
 }
 
@@ -56,4 +56,30 @@
 
 .get-art-details {
   margin: 0px 70px;
+}
+
+.product-operation {
+  background: #F0F5F9;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.product-header {
+  width: 100%;
+  border-bottom: 1px solid #C9D6DF;
+  height: 30px;
+  padding: 20px 30px;
+  font-weight: bold;
+}
+
+.product-header-sm {
+  width: 100px;
+  float: left;
+  font-size: 12px;
+}
+
+.sell-options {
+  height: 40px;
+  padding: 20px 30px;
+  font-weight: bold;
 }
